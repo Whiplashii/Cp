@@ -1,7 +1,10 @@
 package com.lavalamp;
 
+import com.lavalamp.serverlauncher.ServerLauncher;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        ServerLauncher serverLauncher = new ServerLauncher();
+        serverLauncher.WaitClients();
     }
 }

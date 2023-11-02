@@ -13,6 +13,7 @@ public class Client extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("OnlineShop");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -20,4 +21,5 @@ public class Client extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

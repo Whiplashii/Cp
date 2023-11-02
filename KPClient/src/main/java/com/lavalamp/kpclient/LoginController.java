@@ -20,7 +20,7 @@ public class LoginController {
     @FXML
     private Button registrationButton;
     @FXML
-    private TextField loginField;
+    private TextField UserName;
     @FXML
     private PasswordField passwordField;
     private Stage stage;
@@ -28,7 +28,7 @@ public class LoginController {
 
     @FXML
     public void onLoginButtonClick(ActionEvent event){
-        System.out.println(loginField.getText());
+        System.out.println(UserName.getText());
         System.out.println(passwordField.getText());
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-menu.fxml")));
