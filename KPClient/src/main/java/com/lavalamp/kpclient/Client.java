@@ -1,9 +1,12 @@
 package com.lavalamp.kpclient;
 
+import client.ServerClient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pojo.User;
+import request.LoginRequest;
 
 import java.io.IOException;
 
@@ -19,7 +22,10 @@ public class Client extends Application {
     }
 
     public static void main(String[] args) {
+        ServerClient serverClient = new ServerClient();
+        serverClient.ConnectToServer();
+        serverClient.SendRequest(new LoginRequest(new User("debil","debil","debil@mail.ru")));
         launch();
+        serverClient.CloseConnection();
     }
-
 }

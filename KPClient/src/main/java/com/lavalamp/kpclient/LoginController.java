@@ -1,5 +1,6 @@
 package com.lavalamp.kpclient;
 
+import client.ServerClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
+
     @FXML
     private Button loginButton;
     @FXML
