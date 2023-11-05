@@ -1,27 +1,32 @@
 package com.lavalamp.serverlauncher;
 
+import com.lavalamp.requestHandler.RequestHandler;
 import pojo.User;
 import request.IRequest;
+import request.LoginRequest;
+import response.IResponse;
+import response.LoginResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Time;
-import java.util.Calendar;
 
 public class Server implements Runnable {
     private ServerSocket serverSocket;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
-    Socket socket;
+
+    private RequestHandler requestHandler;
+    private Socket socket;
     Server(ServerSocket serverSocket){
         try {
             this.serverSocket = serverSocket;
             socket = serverSocket.accept();
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            requestHandler = new RequestHandler();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -35,7 +40,8 @@ public class Server implements Runnable {
                 IRequest request = GetRequest();
                 User user = (User) request.GetPOJO();
                 System.out.println(user.getUserName() + "\n" + user.getPassword());
-                //SendResponse();
+                LoginResponse loginResponse = (LoginResponse) requestHandler.HandleRequest((LoginRequest)request);
+                SendResponse(loginResponse);
             } catch (IOException ioe) {
                 System.err.println("Client Disconnected");
                 CloseConnection();
@@ -49,8 +55,8 @@ public class Server implements Runnable {
     private IRequest GetRequest()throws IOException,ClassNotFoundException{
         return (IRequest)objectInputStream.readObject();
     }
-    private void SendResponse()throws IOException{
-
+    private void SendResponse(IResponse response)throws IOException{
+        objectOutputStream.writeObject(response);
     }
 
     private void CloseConnection() {
