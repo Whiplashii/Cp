@@ -17,9 +17,6 @@ import request.IRequest;
 import response.LoginResponse;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class LoginController {
@@ -33,46 +30,37 @@ public class LoginController {
     private TextField UserName;
     @FXML
     private PasswordField passwordField;
-    private Stage stage;
-    private Scene scene;
 
     @FXML
-    public void onLoginButtonClick(ActionEvent event){
+    public void onLoginButtonClick(ActionEvent event) {
         System.out.println(UserName.getText());
         System.out.println(passwordField.getText());
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            System.out.println(messageDigest.digest(passwordField.getText().getBytes(StandardCharsets.UTF_8)).toString());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
         LoginRequestCreator loginRequestCreator = new LoginRequestCreator();
-        IRequest request = loginRequestCreator.CreateRequest(new User(UserName.getText(),passwordField.getText()));
-        if(serverClient == null) {
+        IRequest request = loginRequestCreator.CreateRequest(new User(UserName.getText(), passwordField.getText()));
+        if (serverClient == null) {
             serverClient = ServerClient.ConnectToServer();
         }
         serverClient.SendRequest(request);
-       LoginResponse loginResponse =  (LoginResponse)serverClient.GetResponse();
-       if(!loginResponse.accessGranted)return;
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-menu.fxml")));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }catch (IOException ioException){
-            ioException.printStackTrace();
+        LoginResponse loginResponse = (LoginResponse) serverClient.GetResponse();
+        if (!loginResponse.accessGranted) {
+            return;
         }
+        LoadNewScene(event, "main-menu.fxml");
     }
+
     @FXML
-    public void onRegistrationButtonClick(ActionEvent event){
+    public void onRegistrationButtonClick(ActionEvent event) {
+        LoadNewScene(event, "registration-view.fxml");
+    }
+
+    private void LoadNewScene(ActionEvent event, String sceneName) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("registration-view.fxml")));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }catch (IOException ioException){
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }

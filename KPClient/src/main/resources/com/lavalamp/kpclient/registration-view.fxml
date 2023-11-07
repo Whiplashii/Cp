@@ -10,10 +10,9 @@
          <children>
             <PasswordField fx:id="passwordField" layoutX="216.0" layoutY="134.0" prefHeight="25.0" prefWidth="177.0" promptText="Password" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
             <TextField fx:id="usernameTextField" layoutX="216.0" layoutY="99.0" prefHeight="25.0" prefWidth="174.0" promptText="Username" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
-            <DatePicker fx:id="datePicker" layoutX="215.0" layoutY="213.0" promptText="dd/mm/yyyy" />
-            <ChoiceBox layoutX="216.0" layoutY="175.0" prefHeight="25.0" prefWidth="175.0" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
-            <Button fx:id="submitButton" layoutX="325.0" layoutY="258.0" mnemonicParsing="false" onAction="#OnSubmitButtonClick" style="-fx-background-color: #7FFFD4; -fx-background-radius: 20;" text="Submit" />
-            <Button layoutX="226.0" layoutY="258.0" mnemonicParsing="false" onAction="#OnCancelButtonClick" style="-fx-background-radius: 20; -fx-background-color: #DC143C;" text="Cancel" />
+            <TextField fx:id="emailTextField" layoutX="216.0" layoutY="169.0" prefHeight="25.0" prefWidth="176.0" promptText="Email" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
+            <Button fx:id="submitButton" layoutX="327.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnSubmitButtonClick" style="-fx-background-color: #7FFFD4; -fx-background-radius: 20;" text="Submit" />
+            <Button layoutX="228.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnCancelButtonClick" style="-fx-background-radius: 20; -fx-background-color: #DC143C;" text="Cancel" />
          </children>
       </AnchorPane>
    </center>

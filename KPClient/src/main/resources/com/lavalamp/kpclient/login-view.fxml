@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onLoginButtonClick" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.LoginController">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="309.0" style="-fx-background-image: url(D:\Uni\NAPP\KP\KPClient\src\main\resources\com\lavalamp\kpclient\shop.png);" BorderPane.alignment="CENTER_LEFT">
          <children>

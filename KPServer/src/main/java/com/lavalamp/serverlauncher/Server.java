@@ -4,8 +4,10 @@ import com.lavalamp.requestHandler.RequestHandler;
 import pojo.User;
 import request.IRequest;
 import request.LoginRequest;
+import request.RegistrationRequest;
 import response.IResponse;
 import response.LoginResponse;
+import response.RegistrationResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,8 +42,10 @@ public class Server implements Runnable {
                 IRequest request = GetRequest();
                 User user = (User) request.GetPOJO();
                 System.out.println(user.getUserName() + "\n" + user.getPassword());
-                LoginResponse loginResponse = (LoginResponse) requestHandler.HandleRequest((LoginRequest)request);
-                SendResponse(loginResponse);
+                //LoginResponse loginResponse = (LoginResponse) requestHandler.HandleRequest((LoginRequest)request);
+                RegistrationResponse registrationResponse = (RegistrationResponse) requestHandler.HandleRequest((RegistrationRequest) request);
+                //SendResponse(loginResponse);
+                SendResponse(registrationResponse);
             } catch (IOException ioe) {
                 System.err.println("Client Disconnected");
                 CloseConnection();

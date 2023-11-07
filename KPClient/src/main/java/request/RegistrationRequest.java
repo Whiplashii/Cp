@@ -1,6 +1,7 @@
 package request;
 
 import pojo.User;
+import request.IRequest;
 
 import java.io.Serializable;
 
