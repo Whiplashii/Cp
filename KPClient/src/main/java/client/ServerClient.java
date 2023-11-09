@@ -22,6 +22,7 @@ public class ServerClient {
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             this.socket = socket;
         } catch (IOException ioe) {
+            serverClient = null;
             ioe.printStackTrace();
         }
     }

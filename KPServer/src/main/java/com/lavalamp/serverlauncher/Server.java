@@ -42,10 +42,12 @@ public class Server implements Runnable {
                 IRequest request = GetRequest();
                 User user = (User) request.GetPOJO();
                 System.out.println(user.getUserName() + "\n" + user.getPassword());
+                SendResponse(CreateResponse(request));
+
                 //LoginResponse loginResponse = (LoginResponse) requestHandler.HandleRequest((LoginRequest)request);
-                RegistrationResponse registrationResponse = (RegistrationResponse) requestHandler.HandleRequest((RegistrationRequest) request);
+                // RegistrationResponse registrationResponse = (RegistrationResponse) requestHandler.HandleRequest((RegistrationRequest) request);
                 //SendResponse(loginResponse);
-                SendResponse(registrationResponse);
+                // SendResponse(registrationResponse);
             } catch (IOException ioe) {
                 System.err.println("Client Disconnected");
                 CloseConnection();
@@ -61,6 +63,16 @@ public class Server implements Runnable {
     }
     private void SendResponse(IResponse response)throws IOException{
         objectOutputStream.writeObject(response);
+    }
+
+    private IResponse CreateResponse(IRequest request){
+        if(request.getClass() == LoginRequest.class){
+            return requestHandler.HandleRequest((LoginRequest) request);
+        }
+        if(request.getClass() == RegistrationRequest.class){
+           return requestHandler.HandleRequest((RegistrationRequest) request);
+        }
+        return null;
     }
 
     private void CloseConnection() {

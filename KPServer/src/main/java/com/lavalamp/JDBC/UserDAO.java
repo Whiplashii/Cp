@@ -36,16 +36,10 @@ public class UserDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("Select username,userpassword from user where UserName = ? and UserPassword = ?");
             preparedStatement.setString(1,user.getUserName());
             preparedStatement.setString(2,user.getPassword());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next())
-            {
-                String username = resultSet.getString("UserName");
-                String userPassword = resultSet.getString("UserPassword");
-                if(user.getUserName().equals(username) && user.getPassword().equals(userPassword))return true;
-            }
-            return false;
+            preparedStatement.executeQuery();
+            return true;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
     public void CloseConnection(){
