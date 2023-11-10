@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pojo.User;
 import request.RegistrationRequest;
-import response.IResponse;
 import response.RegistrationResponse;
 
 import java.io.IOException;
@@ -64,5 +63,8 @@ public class RegistrationController {
         }catch (IOException ioException){
             ioException.printStackTrace();
         }
+    }
+
+    public static class MainMenuController {
     }
 }

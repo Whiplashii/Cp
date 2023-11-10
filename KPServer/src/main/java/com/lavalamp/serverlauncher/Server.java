@@ -4,6 +4,7 @@ import com.lavalamp.requestHandler.RequestHandler;
 import pojo.User;
 import request.IRequest;
 import request.LoginRequest;
+import request.LogoutRequest;
 import request.RegistrationRequest;
 import response.IResponse;
 import response.LoginResponse;
@@ -40,14 +41,7 @@ public class Server implements Runnable {
         while (!socket.isClosed()) {
             try {
                 IRequest request = GetRequest();
-                User user = (User) request.GetPOJO();
-                System.out.println(user.getUserName() + "\n" + user.getPassword());
                 SendResponse(CreateResponse(request));
-
-                //LoginResponse loginResponse = (LoginResponse) requestHandler.HandleRequest((LoginRequest)request);
-                // RegistrationResponse registrationResponse = (RegistrationResponse) requestHandler.HandleRequest((RegistrationRequest) request);
-                //SendResponse(loginResponse);
-                // SendResponse(registrationResponse);
             } catch (IOException ioe) {
                 System.err.println("Client Disconnected");
                 CloseConnection();
@@ -64,13 +58,15 @@ public class Server implements Runnable {
     private void SendResponse(IResponse response)throws IOException{
         objectOutputStream.writeObject(response);
     }
-
-    private IResponse CreateResponse(IRequest request){
-        if(request.getClass() == LoginRequest.class){
+    private IResponse CreateResponse(IRequest request) {
+        if (request.getClass() == LoginRequest.class) {
             return requestHandler.HandleRequest((LoginRequest) request);
         }
-        if(request.getClass() == RegistrationRequest.class){
-           return requestHandler.HandleRequest((RegistrationRequest) request);
+        if (request.getClass() == RegistrationRequest.class) {
+            return requestHandler.HandleRequest((RegistrationRequest) request);
+        }
+        if (request.getClass() == LogoutRequest.class) {
+            return requestHandler.HandleRequest((LogoutRequest) request);
         }
         return null;
     }
