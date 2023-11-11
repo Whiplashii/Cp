@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root fx:id="item" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #1b2330;" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="itemImage" fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/Placeholder.png" />
+         </image></ImageView>
+      <VBox layoutX="86.0" layoutY="7.0" prefHeight="86.0" prefWidth="159.0">
+         <children>
+            <TextField fx:id="itemTitle" editable="false" style="-fx-background-color: #696969;" text="Title">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor></TextField>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="itemPrice" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: green;" text="2.99$">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Separator layoutY="99.0" prefHeight="1.0" prefWidth="250.0" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</fx:root>

@@ -8,8 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import request.LogoutRequest;
@@ -47,10 +49,12 @@ public class MainMenuController {
     @FXML
     private void fun(){
         for (int i = 0;i < 10;i++) {
+            /*
             HBox hBox = new HBox();
             hBox.getChildren().add(new ImageView());
-            hBox.getChildren().add(new Label("fuck"));
-            objectsVBox.getChildren().add(hBox);
+            hBox.getChildren().add(new Label("fuck"));*/
+            Item item = new Item();
+            objectsVBox.getChildren().add(new Item());
         }
     }
     @FXML
