@@ -38,7 +38,8 @@ public class ServerClient {
         try {
             objectOutputStream.writeObject(request);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            //throw new RuntimeException(e);
         }
     }
 

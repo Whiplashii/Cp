@@ -9,6 +9,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Client extends Application {
+    public static void main(String[] args) {
+        ServerClient serverClient = ServerClient.ConnectToServer();
+        launch();
+        serverClient.CloseConnection();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("login-view.fxml"));
@@ -16,11 +22,5 @@ public class Client extends Application {
         stage.setTitle("OnlineShop");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        ServerClient serverClient = ServerClient.ConnectToServer();
-        launch();
-        serverClient.CloseConnection();
     }
 }

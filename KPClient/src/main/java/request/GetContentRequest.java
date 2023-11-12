@@ -4,10 +4,11 @@ import pojo.User;
 
 import java.io.Serializable;
 
-public class LoginRequest implements IRequest {
+public class GetContentRequest implements IRequest{
+
     private User user;
 
-    public LoginRequest(User user) {
+    public GetContentRequest(User user){
         this.user = user;
     }
 

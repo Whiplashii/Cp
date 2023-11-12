@@ -17,6 +17,7 @@ import request.IRequest;
 import response.LoginResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class LoginController {
@@ -30,6 +31,7 @@ public class LoginController {
     private TextField UserName;
     @FXML
     private PasswordField passwordField;
+
 
     @FXML
     public void onLoginButtonClick(ActionEvent event) {

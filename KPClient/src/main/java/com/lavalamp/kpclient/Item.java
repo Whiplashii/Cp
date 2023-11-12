@@ -2,13 +2,14 @@ package com.lavalamp.kpclient;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class Item  extends Pane {
+public class Item extends Pane {
     @FXML
     private ImageView itemImage;
     @FXML
@@ -16,7 +17,7 @@ public class Item  extends Pane {
     @FXML
     private TextField itemPrice;
 
-    public Item(){
+    public Item() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "content-item.fxml"));
         fxmlLoader.setRoot(this);
@@ -28,16 +29,22 @@ public class Item  extends Pane {
             throw new RuntimeException(exception);
         }
     }
-    public String GetTitle(){
+
+    public String GetTitle() {
         return itemTitle.getText();
     }
-    public String GetPrice(){
+
+    public String GetPrice() {
         return itemPrice.getText();
     }
-    public void SetTitle(String title){
+
+    public void SetTitle(String title) {
         itemTitle.setText(title);
     }
-    public void SetPrice(String price){
+
+    public void SetPrice(String price) {
         itemPrice.setText(price);
     }
+
+
 }

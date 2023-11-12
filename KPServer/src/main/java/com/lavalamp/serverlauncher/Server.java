@@ -1,14 +1,8 @@
 package com.lavalamp.serverlauncher;
 
 import com.lavalamp.requestHandler.RequestHandler;
-import pojo.User;
-import request.IRequest;
-import request.LoginRequest;
-import request.LogoutRequest;
-import request.RegistrationRequest;
+import request.*;
 import response.IResponse;
-import response.LoginResponse;
-import response.RegistrationResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -67,6 +61,9 @@ public class Server implements Runnable {
         }
         if (request.getClass() == LogoutRequest.class) {
             return requestHandler.HandleRequest((LogoutRequest) request);
+        }
+        if(request.getClass() == GetContentRequest.class) {
+            return requestHandler.HandleRequest((GetContentRequest) request);
         }
         return null;
     }

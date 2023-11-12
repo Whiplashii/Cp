@@ -6,11 +6,11 @@ import request.LoginRequest;
 
 import java.io.Serializable;
 
-public class LoginRequestCreator implements IRequestCreator{
+public class LoginRequestCreator implements IRequestCreator {
 
     @Override
     public IRequest CreateRequest(Serializable data) {
-        User user  = (User) data;
+        User user = (User) data;
         return new LoginRequest(user);
     }
 }

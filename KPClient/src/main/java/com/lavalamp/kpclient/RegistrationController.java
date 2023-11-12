@@ -31,36 +31,38 @@ public class RegistrationController {
     private Stage stage;
 
     @FXML
-    protected void OnSubmitButtonClick(ActionEvent event){
-        if(serverClient == null)
-        {
+    protected void OnSubmitButtonClick(ActionEvent event) {
+        if (serverClient == null) {
             serverClient = ServerClient.ConnectToServer();
         }
         User user = SetAccount();
         serverClient.SendRequest(new RegistrationRequest(user));
         RegistrationResponse registrationResponse = (RegistrationResponse) serverClient.GetResponse();
-        if(!registrationResponse.accepted)return;
+        if (!registrationResponse.accepted) return;
         TransactToLogin(event);
     }
-    private User SetAccount(){
+
+    private User SetAccount() {
         System.out.println(usernameTextField.getText());
         System.out.println(passwordField.getText());
         System.out.println(emailTextField.getText());
-        User user = new User(usernameTextField.getText(),passwordField.getText(),emailTextField.getText());
+        User user = new User(usernameTextField.getText(), passwordField.getText(), emailTextField.getText());
         return user;
     }
+
     @FXML
-    protected void OnCancelButtonClick(ActionEvent event){
+    protected void OnCancelButtonClick(ActionEvent event) {
         TransactToLogin(event);
     }
-    private void TransactToLogin(ActionEvent event){
+
+    private void TransactToLogin(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }catch (IOException ioException){
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
