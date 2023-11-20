@@ -7,7 +7,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.LoginController">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="309.0" style="-fx-background-image: url(D:\Uni\NAPP\KP\KPClient\src\main\resources\com\lavalamp\kpclient\shop.png);" BorderPane.alignment="CENTER_LEFT">
+      <AnchorPane prefHeight="400.0" prefWidth="309.0" BorderPane.alignment="CENTER_LEFT">
          <children>
             <ImageView fitHeight="411.0" fitWidth="364.0" layoutX="-27.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="-27.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="18.0">
                <image>

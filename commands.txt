@@ -1,0 +1,1 @@
+INSERT INTO `kp`.`user` (`username`, `useremail`, `userpassword`, `usersalt`, `wallet`, `userroleid`, `currensyid`, `isbanned`) VALUES ('user', 'user@mail.ru', 'user', 'u', '12', '1', '1', '0');

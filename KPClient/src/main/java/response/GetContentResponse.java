@@ -5,5 +5,5 @@ import pojo.Content;
 import java.util.ArrayList;
 
 public class GetContentResponse implements IResponse{
-    ArrayList<Content> contentList;
+    public ArrayList<Content> contentList;
 }

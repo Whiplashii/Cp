@@ -43,6 +43,6 @@ public class RequestHandler {
     public IResponse HandleRequest(GetContentRequest getContentRequest){
         GetContentResponse getContentResponse = new GetContentResponse();
         getContentResponse.contentList = userDAO.GetContent();
-        return new GetContentResponse();
+        return getContentResponse;
     }
 }

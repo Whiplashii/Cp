@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import pojo.Content;
 import request.LogoutRequest;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 public class MainMenuController {
     private ServerClient serverClient;
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>();
 
     @FXML
     private VBox objectsVBox;
@@ -52,6 +53,17 @@ public class MainMenuController {
             item.setOnMouseClicked(s -> {
                 remove(item);
             });
+            objectsVBox.getChildren().add(item);
+        }
+    }
+
+    public void SetContent(ArrayList<Content> contentList){
+        for(var content:contentList) {
+            Item item = new Item();
+            item.SetTitle(content.getContentName());
+            item.SetPrice(content.getContentPrice() + "$");
+            item.setOnMouseClicked((event)->remove(item));
+            items.add(item);
             objectsVBox.getChildren().add(item);
         }
     }

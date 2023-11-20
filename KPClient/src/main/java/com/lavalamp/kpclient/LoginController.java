@@ -12,8 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pojo.Content;
 import pojo.User;
+import request.GetContentRequest;
 import request.IRequest;
+import response.GetContentResponse;
 import response.LoginResponse;
 
 import java.io.IOException;
@@ -37,6 +40,7 @@ public class LoginController {
     public void onLoginButtonClick(ActionEvent event) {
         System.out.println(UserName.getText());
         System.out.println(passwordField.getText());
+
         LoginRequestCreator loginRequestCreator = new LoginRequestCreator();
         IRequest request = loginRequestCreator.CreateRequest(new User(UserName.getText(), passwordField.getText()));
         if (serverClient == null) {
@@ -47,7 +51,30 @@ public class LoginController {
         if (!loginResponse.accessGranted) {
             return;
         }
-        LoadNewScene(event, "main-menu.fxml");
+
+        GetContentRequest getContentRequest = new GetContentRequest(new User());
+        serverClient.SendRequest(getContentRequest);
+        GetContentResponse getContentResponse = (GetContentResponse) serverClient.GetResponse();
+        LoadMainMenu(event,getContentResponse.contentList);
+        //LoadNewScene(event, "main-menu.fxml");
+    }
+
+    private void LoadMainMenu(ActionEvent event, ArrayList<Content> contentList){
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+            Parent root = loader.load();
+
+            MainMenuController mainMenuController = loader.getController();
+            mainMenuController.SetContent(contentList);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @FXML

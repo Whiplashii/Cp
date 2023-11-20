@@ -35,6 +35,8 @@ public class UserDAO {
 
     private Content GetContentFromResultSet(ResultSet resultSet){
         Content content = new Content();
+        content.setContentName("From server with love");
+        content.setContentPrice(3.0f);
         //todo get content from result set;
         return content;
     }
