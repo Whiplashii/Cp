@@ -60,15 +60,17 @@ public class UserDAO {
         if (connection == null) {
             connection = JDBCConnector.GetConnection();
         }
+        boolean userExists = false;
         try {
-            //todo implement checking user by username and password
             PreparedStatement preparedStatement = connection.prepareStatement("Select username,userpassword from user where username = ? and userpassword = ?");
             preparedStatement.setString(1,user.getUserName());
             preparedStatement.setString(2,user.getPassword());
-            return preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            userExists = resultSet.next();
         } catch (SQLException e) {
-            return false;
+            e.printStackTrace();
         }
+        return userExists;
     }
     public void CloseConnection(){
         try {
