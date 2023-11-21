@@ -8,11 +8,11 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField fx:id="passwordField" layoutX="216.0" layoutY="134.0" prefHeight="25.0" prefWidth="177.0" promptText="Password" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
-            <TextField fx:id="usernameTextField" layoutX="216.0" layoutY="99.0" prefHeight="25.0" prefWidth="174.0" promptText="Username" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
-            <TextField fx:id="emailTextField" layoutX="216.0" layoutY="169.0" prefHeight="25.0" prefWidth="176.0" promptText="Email" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
-            <Button fx:id="submitButton" layoutX="327.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnSubmitButtonClick" style="-fx-background-color: #7FFFD4; -fx-background-radius: 20;" text="Submit" />
-            <Button layoutX="228.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnCancelButtonClick" style="-fx-background-radius: 20; -fx-background-color: #DC143C;" text="Cancel" />
+            <PasswordField fx:id="passwordField" layoutX="216.0" layoutY="134.0" prefHeight="25.0" prefWidth="197.0" promptText="Пароль" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
+            <TextField fx:id="usernameTextField" layoutX="216.0" layoutY="99.0" prefHeight="25.0" prefWidth="198.0" promptText="Логин" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
+            <TextField fx:id="emailTextField" layoutX="216.0" layoutY="169.0" prefHeight="25.0" prefWidth="197.0" promptText="Эл. Почта" style="-fx-background-radius: 20; -fx-background-color: #696969;" />
+            <Button fx:id="submitButton" layoutX="327.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnSubmitButtonClick" style="-fx-background-color: #7FFFD4; -fx-background-radius: 20;" text="Подтвердить" />
+            <Button layoutX="216.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnCancelButtonClick" style="-fx-background-radius: 20; -fx-background-color: #DC143C;" text="Отменить" />
          </children>
       </AnchorPane>
    </center>

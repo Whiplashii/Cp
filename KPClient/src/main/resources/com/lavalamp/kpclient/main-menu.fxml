@@ -20,12 +20,12 @@
                   <Label text="22.03$" />
                </children>
             </VBox>
-            <Button mnemonicParsing="false" text="Store">
+            <Button mnemonicParsing="false" text="Магазин">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clear" text="Library">
+            <Button mnemonicParsing="false" onMouseClicked="#clear" text="Библиотека">
                <font>
                   <Font size="14.0" />
                </font>
@@ -54,4 +54,24 @@
          </content>
       </ScrollPane>
    </right>
+   <left>
+      <VBox prefHeight="360.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="222.0">
+               <children>
+                  <TextField fx:id="searchField" prefHeight="25.0" prefWidth="239.0" promptText="Поиск" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#SearchButtonClick" prefHeight="25.0" prefWidth="20.0">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/searchIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>

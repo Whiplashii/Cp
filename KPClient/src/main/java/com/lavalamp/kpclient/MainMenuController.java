@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
@@ -17,6 +19,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainMenuController {
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
     private ServerClient serverClient;
     private ArrayList<Item> items = new ArrayList<>();
 
@@ -33,6 +39,15 @@ public class MainMenuController {
         LoadNewScene(event, "login-view.fxml");
     }
 
+    @FXML
+    public void SearchButtonClick(ActionEvent event){
+        objectsVBox.getChildren().clear();
+        for(var item:items){
+            if(item.GetTitle().contains(searchField.getCharacters())){
+                objectsVBox.getChildren().add(item);
+            }
+        }
+    }
     private void LoadNewScene(ActionEvent event, String sceneName) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
@@ -53,6 +68,7 @@ public class MainMenuController {
             item.setOnMouseClicked(s -> {
                 remove(item);
             });
+            items.add(item);
             objectsVBox.getChildren().add(item);
         }
     }
