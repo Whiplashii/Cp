@@ -40,14 +40,13 @@ public class MainMenuController {
     }
 
     @FXML
-    public void SearchButtonClick(ActionEvent event){
+    public void SearchButtonClick(){
         objectsVBox.getChildren().clear();
         for(var item:items){
-            if(item.GetTitle().contains(searchField.getCharacters())){
+            if(item.GetTitle().contains(searchField.getText()))
                 objectsVBox.getChildren().add(item);
             }
         }
-    }
     private void LoadNewScene(ActionEvent event, String sceneName) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
