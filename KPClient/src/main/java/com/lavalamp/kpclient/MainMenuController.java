@@ -8,10 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
+import pojo.User;
 import request.LogoutRequest;
 
 import java.io.IOException;
@@ -23,11 +25,28 @@ public class MainMenuController {
     private TextField searchField;
     @FXML
     private Button searchButton;
+    @FXML
+    private Label userNameLabel;
+    @FXML
+    private Label userWalletLabel;
     private ServerClient serverClient;
     private ArrayList<Item> items = new ArrayList<>();
 
+    private User user;
+
     @FXML
     private VBox objectsVBox;
+
+    public void Initialize(User user,ArrayList<Content> contentList) {
+        if (user != null) {
+            this.user = user;
+        } else {
+            this.user = new User();
+        }
+        userNameLabel.setText(this.user.getUserName());
+        userWalletLabel.setText(this.user.getWallet() + "$");
+        SetContent(contentList);
+    }
 
     @FXML
     public void LogoutButtonClick(ActionEvent event) {

@@ -56,7 +56,6 @@ public class LoginController {
         serverClient.SendRequest(getContentRequest);
         GetContentResponse getContentResponse = (GetContentResponse) serverClient.GetResponse();
         LoadMainMenu(event,getContentResponse.contentList);
-        //LoadNewScene(event, "main-menu.fxml");
     }
 
     private void LoadMainMenu(ActionEvent event, ArrayList<Content> contentList){
@@ -66,7 +65,7 @@ public class LoginController {
             Parent root = loader.load();
 
             MainMenuController mainMenuController = loader.getController();
-            mainMenuController.SetContent(contentList);
+            mainMenuController.Initialize(null,contentList);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
