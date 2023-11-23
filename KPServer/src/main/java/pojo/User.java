@@ -1,5 +1,9 @@
 package pojo;
 
+
+
+import enums.UserRole;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -10,7 +14,12 @@ public class User implements Serializable {
     private Float wallet;
     private Boolean isBanned;
 
+    private UserRole userRole;
+
     public User() {
+        userRole = UserRole.user;
+        wallet = 0.0f;
+        isBanned = false;
     }
 
     public User(String userName, String password, String email) {
@@ -28,7 +37,7 @@ public class User implements Serializable {
         return userName;
     }
 
-    public void SetUserName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -70,5 +79,13 @@ public class User implements Serializable {
 
     public void setUserSalt(String userSalt) {
         this.userSalt = userSalt;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }

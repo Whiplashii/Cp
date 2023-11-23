@@ -52,7 +52,6 @@ public class UserDAO {
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
             return preparedStatement.execute();
-
         } catch (SQLException e) {
             return false;
         }

@@ -43,6 +43,8 @@ public class MainMenuController {
         } else {
             this.user = new User();
         }
+        this.user.setUserName("Олег");
+        this.user.setWallet(3.0f);
         userNameLabel.setText(this.user.getUserName());
         userWalletLabel.setText(this.user.getWallet() + "$");
         SetContent(contentList);
