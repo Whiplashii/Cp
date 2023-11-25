@@ -1,6 +1,5 @@
 package com.lavalamp.kpclient;
 
-import client.ServerClient;
 import com.lavalamp.kpclient.modules.RegistrationModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pojo.User;
-import request.RegistrationRequest;
 import response.RegistrationResponse;
 
 import java.io.IOException;
@@ -20,7 +18,6 @@ import java.util.Objects;
 
 public class RegistrationController {
 
-    private ServerClient serverClient;
     private RegistrationModule registrationModule;
     @FXML
     private TextField usernameTextField;
@@ -43,20 +40,9 @@ public class RegistrationController {
             return;
         }
         TransactToLogin(event);
-        /*if (serverClient == null) {
-            serverClient = ServerClient.ConnectToServer();
-        }
-        User user = SetAccount();
-        serverClient.SendRequest(new RegistrationRequest(user));
-        RegistrationResponse registrationResponse = (RegistrationResponse) serverClient.GetResponse();
-        if (!registrationResponse.accepted) return;
-        TransactToLogin(event);*/
     }
 
     private User SetAccount() {
-        System.out.println(usernameTextField.getText());
-        System.out.println(passwordField.getText());
-        System.out.println(emailTextField.getText());
         User user = new User(usernameTextField.getText(), passwordField.getText(), emailTextField.getText());
         return user;
     }
@@ -78,6 +64,4 @@ public class RegistrationController {
         }
     }
 
-    public static class MainMenuController {
-    }
 }

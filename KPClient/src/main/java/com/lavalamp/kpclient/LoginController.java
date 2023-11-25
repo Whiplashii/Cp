@@ -44,23 +44,10 @@ public class LoginController {
         System.out.println(passwordField.getText());
         User user = new User(userName.getText(),passwordField.getText());
         LoginResponse loginResponse = loginModule.LogIn(user);
-        loginResponse.accessGranted = true;
         if(!loginResponse.accessGranted){
             return;
         }
         DecideMainMenuType(event, user);
-       /* LoginRequestCreator loginRequestCreator = new LoginRequestCreator();
-        IRequest request = loginRequestCreator.CreateRequest(new User(UserName.getText(), passwordField.getText()));
-        if (serverClient == null) {
-            serverClient = ServerClient.ConnectToServer();
-        }
-        serverClient.SendRequest(request);
-        LoginResponse loginResponse = (LoginResponse) serverClient.GetResponse();
-        if (!loginResponse.accessGranted) {
-            return;
-        }
-        User user = new User();
-        DecideMainMenuType(event,user);*/
     }
     @FXML
     public void onRegistrationButtonClick(ActionEvent event) {

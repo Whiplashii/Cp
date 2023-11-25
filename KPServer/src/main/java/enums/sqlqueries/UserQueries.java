@@ -1,7 +1,9 @@
 package enums.sqlqueries;
 
 public enum UserQueries {
-    findUserByLogin("Select username,userpassword from user where username = ? and userpassword = ?");
+    findUserByLogin("Select * from user where username = ?"),
+    insertUser("INSERT INTO `kp`.`user` (`username`, `useremail`, `userpassword`, `usersalt`, `wallet`, `userroleid`, `currensyid`, `isbanned`) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, '0')");
 
     private String query;
     UserQueries(String query){

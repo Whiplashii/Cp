@@ -1,5 +1,6 @@
 package com.lavalamp.JDBC;
 
+import com.lavalamp.hashing.HashGenerator;
 import enums.sqlqueries.UserQueries;
 import pojo.Content;
 import pojo.User;
@@ -46,8 +47,7 @@ public class UserDAO {
         }
         try {
             //todo implement inserting User
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `kp`.`user` (`username`, `useremail`, `userpassword`, `usersalt`, `wallet`, `userroleid`, `currensyid`, `isbanned`) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, '0')");
+            PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.insertUser.toString());
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
@@ -69,9 +69,16 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.findUserByLogin.toString());
             preparedStatement.setString(1,user.getUserName());
-            preparedStatement.setString(2,user.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();
-            userExists = resultSet.next();
+            if(resultSet.next())
+            {
+                String salt = resultSet.getString("usersalt");
+                String password = resultSet.getString("userpassword");
+                String hashedPassword = HashGenerator.GenerateHashedPassword(user.getPassword() + salt);
+                if(password.equals(hashedPassword)){
+                    userExists = true;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
