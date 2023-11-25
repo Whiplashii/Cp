@@ -49,7 +49,7 @@ public class LoginController {
             return;
         }
         User user = new User();
-        user.setUserRole(UserRole.admin);
+        //user.setUserRole(UserRole.admin);
         DecideMainMenuType(event,user);
     }
 

@@ -1,5 +1,6 @@
 package com.lavalamp.JDBC;
 
+import enums.sqlqueries.UserQueries;
 import pojo.Content;
 import pojo.User;
 
@@ -57,13 +58,13 @@ public class UserDAO {
         }
     }
 
-    public boolean CheckUserToLogin(User user) {
+    public boolean FindUserByLogin(User user) {
         if (connection == null) {
             connection = JDBCConnector.GetConnection();
         }
         boolean userExists = false;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("Select username,userpassword from user where username = ? and userpassword = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.findUserByLogin.toString());
             preparedStatement.setString(1,user.getUserName());
             preparedStatement.setString(2,user.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();

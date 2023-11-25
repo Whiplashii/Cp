@@ -13,8 +13,8 @@ public class User implements Serializable {
     private String userSalt;
     private Float wallet;
     private Boolean isBanned;
-
     private UserRole userRole;
+    private int userCurrencyID;
 
     public User() {
         userRole = UserRole.user;
@@ -87,5 +87,13 @@ public class User implements Serializable {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public int getUserCurrencyID() {
+        return userCurrencyID;
+    }
+
+    public void setUserCurrencyID(int userCurrencyID) {
+        this.userCurrencyID = userCurrencyID;
     }
 }

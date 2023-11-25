@@ -17,7 +17,7 @@ public class RequestHandler {
             userDAO = new UserDAO();
         }
         LoginResponse loginResponse = new LoginResponse();
-        loginResponse.accessGranted = userDAO.CheckUserToLogin((User) loginRequest.GetPOJO());
+        loginResponse.accessGranted = userDAO.FindUserByLogin((User) loginRequest.GetPOJO());
         if (loginResponse.accessGranted) {
             user = (User) loginRequest.GetPOJO();
         }

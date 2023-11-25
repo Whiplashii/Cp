@@ -1,7 +1,7 @@
 package pojo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Content implements Serializable {
     private int contentID;
@@ -11,6 +11,8 @@ public class Content implements Serializable {
     private int contentTypeID;
     private int userID;
     private Date date;
+
+    private int currencyID;
 
     public Content() {
     }
@@ -69,5 +71,13 @@ public class Content implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getCurrencyID() {
+        return currencyID;
+    }
+
+    public void setCurrencyID(int currencyID) {
+        this.currencyID = currencyID;
     }
 }
