@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient;
 
 import client.ServerClient;
+import com.lavalamp.kpclient.modules.RegistrationModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,8 @@ import java.util.Objects;
 
 public class RegistrationController {
 
-    ServerClient serverClient;
+    private ServerClient serverClient;
+    private RegistrationModule registrationModule;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -30,16 +32,25 @@ public class RegistrationController {
     private Scene scene;
     private Stage stage;
 
+    public RegistrationController(){
+        registrationModule = new RegistrationModule(this);
+    }
+
     @FXML
     protected void OnSubmitButtonClick(ActionEvent event) {
-        if (serverClient == null) {
+        RegistrationResponse registrationResponse = registrationModule.SignIn(SetAccount());
+        if(!registrationResponse.accepted){
+            return;
+        }
+        TransactToLogin(event);
+        /*if (serverClient == null) {
             serverClient = ServerClient.ConnectToServer();
         }
         User user = SetAccount();
         serverClient.SendRequest(new RegistrationRequest(user));
         RegistrationResponse registrationResponse = (RegistrationResponse) serverClient.GetResponse();
         if (!registrationResponse.accepted) return;
-        TransactToLogin(event);
+        TransactToLogin(event);*/
     }
 
     private User SetAccount() {

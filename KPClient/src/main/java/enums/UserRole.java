@@ -8,4 +8,7 @@ public enum UserRole {
     UserRole(int value){
         this.value = value;
     }
+    public int getInt(){
+        return value;
+    }
 }

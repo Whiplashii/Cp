@@ -33,7 +33,6 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
     }
-
     private Content GetContentFromResultSet(ResultSet resultSet){
         Content content = new Content();
         content.setContentName("From server with love");
@@ -41,23 +40,27 @@ public class UserDAO {
         //todo get content from result set;
         return content;
     }
-
     public boolean InsertNewUser(User user) {
         if (connection == null) {
             connection = JDBCConnector.GetConnection();
         }
         try {
             //todo implement inserting User
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (`username`, `useremail`, `userpassword`, `userroleid`) VALUES (?, ?, ?, '1')");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `kp`.`user` (`username`, `useremail`, `userpassword`, `usersalt`, `wallet`, `userroleid`, `currensyid`, `isbanned`) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, '0')");
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4,user.getUserSalt());
+            preparedStatement.setFloat(5,user.getWallet());
+            preparedStatement.setInt(6,user.getUserRole().getInt());
+            preparedStatement.setInt(7,1);
             return preparedStatement.execute();
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
-
     public boolean FindUserByLogin(User user) {
         if (connection == null) {
             connection = JDBCConnector.GetConnection();

@@ -1,8 +1,7 @@
 package com.lavalamp.kpclient;
 
 import client.ServerClient;
-import com.lavalamp.kpclient.requestCreator.LoginRequestCreator;
-import enums.UserRole;
+import com.lavalamp.kpclient.modules.LoginModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,30 +14,42 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pojo.User;
 import request.GetContentRequest;
-import request.IRequest;
 import response.GetContentResponse;
 import response.LoginResponse;
+
 import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
 
-    ServerClient serverClient;
+    private ServerClient serverClient;
+    private LoginModule loginModule;
     @FXML
     private Button loginButton;
     @FXML
     private Button registrationButton;
     @FXML
-    private TextField UserName;
+    private TextField userName;
     @FXML
     private PasswordField passwordField;
 
+    public LoginController(){
+        loginModule = new LoginModule(this);
+        serverClient = ServerClient.ConnectToServer();
+    }
+
     @FXML
     public void onLoginButtonClick(ActionEvent event) {
-        System.out.println(UserName.getText());
+        System.out.println(userName.getText());
         System.out.println(passwordField.getText());
-
-        LoginRequestCreator loginRequestCreator = new LoginRequestCreator();
+        User user = new User(userName.getText(),passwordField.getText());
+        LoginResponse loginResponse = loginModule.LogIn(user);
+        loginResponse.accessGranted = true;
+        if(!loginResponse.accessGranted){
+            return;
+        }
+        DecideMainMenuType(event, user);
+       /* LoginRequestCreator loginRequestCreator = new LoginRequestCreator();
         IRequest request = loginRequestCreator.CreateRequest(new User(UserName.getText(), passwordField.getText()));
         if (serverClient == null) {
             serverClient = ServerClient.ConnectToServer();
@@ -49,10 +60,12 @@ public class LoginController {
             return;
         }
         User user = new User();
-        //user.setUserRole(UserRole.admin);
-        DecideMainMenuType(event,user);
+        DecideMainMenuType(event,user);*/
     }
-
+    @FXML
+    public void onRegistrationButtonClick(ActionEvent event) {
+        LoadNewScene(event, "registration-view.fxml");
+    }
     private void DecideMainMenuType(ActionEvent event,User user){
         switch (user.getUserRole())
         {
@@ -60,7 +73,6 @@ public class LoginController {
             case admin ->LoadAdminMainMenu(event,user);
         }
     }
-
     private void LoadMainMenu(ActionEvent event,User user){
         try {
             GetContentRequest getContentRequest = new GetContentRequest(new User());
@@ -95,11 +107,6 @@ public class LoginController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @FXML
-    public void onRegistrationButtonClick(ActionEvent event) {
-        LoadNewScene(event, "registration-view.fxml");
     }
 
     private void LoadNewScene(ActionEvent event, String sceneName) {

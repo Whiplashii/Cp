@@ -21,7 +21,7 @@
       <AnchorPane prefHeight="400.0" prefWidth="315.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <children>
             <PasswordField fx:id="passwordField" layoutX="32.0" layoutY="200.0" prefHeight="25.0" prefWidth="206.0" promptText="Пароль" style="-fx-background-color: #696969; -fx-background-radius: 20;" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="25.0" />
-            <TextField fx:id="UserName" layoutX="31.0" layoutY="168.0" prefHeight="25.0" prefWidth="208.0" promptText="Логин" style="-fx-background-color: #696969; -fx-background-radius: 20;" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="24.0" />
+            <TextField fx:id="userName" layoutX="31.0" layoutY="168.0" prefHeight="25.0" prefWidth="208.0" promptText="Логин" style="-fx-background-color: #696969; -fx-background-radius: 20;" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="24.0" />
             <Button fx:id="registrationButton" layoutX="31.0" layoutY="252.0" mnemonicParsing="false" onAction="#onRegistrationButtonClick" style="-fx-background-color: #DC143C; -fx-background-radius: 20;" text="Создать аккаунт" AnchorPane.leftAnchor="31.0" />
             <Button fx:id="loginButton" layoutX="140.0" layoutY="252.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="26.0" prefWidth="49.0" style="-fx-background-radius: 20; -fx-background-color: #7FFFD4;" text="Войти" textAlignment="CENTER" AnchorPane.rightAnchor="25.0" />
          </children>
