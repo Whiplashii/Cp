@@ -10,7 +10,7 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="512.0" BorderPane.alignment="CENTER">
         <items>
-            <VBox prefHeight="20.0" prefWidth="100.0">
+            <VBox prefHeight="44.0" prefWidth="236.0">
                <children>
                   <Label fx:id="userNameLabel" prefHeight="17.0" prefWidth="138.0" text="Username">
                      <font>
@@ -51,14 +51,14 @@
       </ToolBar>
    </top>
    <right>
-      <ScrollPane prefHeight="360.0" prefWidth="299.0" BorderPane.alignment="CENTER">
+      <ScrollPane prefHeight="346.0" prefWidth="328.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="objectsVBox" prefHeight="357.0" prefWidth="295.0" style="-fx-background-color: #1b2330;" />
+            <VBox fx:id="objectsVBox" prefHeight="357.0" prefWidth="308.0" style="-fx-background-color: #1b2330;" />
          </content>
       </ScrollPane>
    </right>
    <left>
-      <VBox prefHeight="360.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="346.0" prefWidth="271.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="35.0" prefWidth="222.0">
                <children>
