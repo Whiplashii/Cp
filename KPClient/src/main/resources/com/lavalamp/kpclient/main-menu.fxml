@@ -10,7 +10,7 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="512.0" BorderPane.alignment="CENTER">
         <items>
-            <VBox prefHeight="44.0" prefWidth="236.0">
+            <VBox prefHeight="44.0" prefWidth="227.0">
                <children>
                   <Label fx:id="userNameLabel" prefHeight="17.0" prefWidth="138.0" text="Username">
                      <font>
@@ -20,17 +20,17 @@
                   <Label fx:id="userWalletLabel" text="22.03$" />
                </children>
             </VBox>
-            <Button mnemonicParsing="false" text="Магазин">
+            <Button fx:id="addContentButton" mnemonicParsing="false" text="Добавить">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#clear" text="Библиотека">
+            <Button mnemonicParsing="false" text="Библиотека">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#fun" text="Пополнить счет">
+            <Button mnemonicParsing="false" text="Пополнить счет">
                <font>
                   <Font size="14.0" />
                </font></Button>
@@ -53,7 +53,7 @@
    <right>
       <ScrollPane prefHeight="346.0" prefWidth="328.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="objectsVBox" prefHeight="357.0" prefWidth="308.0" style="-fx-background-color: #1b2330;" />
+            <VBox fx:id="objectsVBox" prefHeight="357.0" prefWidth="317.0" style="-fx-background-color: #1b2330;" />
          </content>
       </ScrollPane>
    </right>
@@ -62,8 +62,8 @@
          <children>
             <HBox prefHeight="35.0" prefWidth="222.0">
                <children>
-                  <TextField fx:id="searchField" prefHeight="25.0" prefWidth="239.0" promptText="Поиск" />
-                  <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#SearchButtonClick" prefHeight="25.0" prefWidth="20.0">
+                  <TextField fx:id="searchField" onKeyTyped="#SearchFieldTyped" prefHeight="25.0" prefWidth="239.0" promptText="Поиск" />
+                  <Button mnemonicParsing="false" onMouseClicked="#SearchFieldTyped" prefHeight="25.0" prefWidth="20.0">
                      <graphic>
                         <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                            <image>

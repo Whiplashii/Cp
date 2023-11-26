@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient;
 
-import client.ServerClient;
+import com.lavalamp.kpclient.modules.MainMenuModule;
+import enums.UserRole;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,63 +11,76 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
 import pojo.User;
-import request.LogoutRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainMenuController {
+    private MainMenuModule mainMenuModule;
     @FXML
     private TextField searchField;
     @FXML
-    private Button searchButton;
+    private Button addContentButton;
     @FXML
     private Label userNameLabel;
     @FXML
     private Label userWalletLabel;
-    private ServerClient serverClient;
     private ArrayList<Item> items = new ArrayList<>();
-
     private User user;
-
     @FXML
     private VBox objectsVBox;
 
+    public MainMenuController(){
+        mainMenuModule = new MainMenuModule();
+    }
+
     public void Initialize(User user,ArrayList<Content> contentList) {
-        if (user != null) {
-            this.user = user;
-        } else {
-            this.user = new User();
-        }
+        this.user = Objects.requireNonNullElseGet(user, User::new);
         userNameLabel.setText(this.user.getUserName());
         userWalletLabel.setText(this.user.getWallet() + "$");
+        if(user.getUserRole() != UserRole.creator) {
+            addContentButton.setDisable(true);
+        }
         SetContent(contentList);
+    }
+    public void SetContent(ArrayList<Content> contentList){
+        for(var content:contentList) {
+            Item item = new Item();
+            item.setItemID(content.getContentID());
+            item.SetTitle(content.getContentName());
+            item.SetPrice(content.getContentPrice() + "$");
+            item.setOnMouseClicked((event)->remove(item));
+            item.getOnMouseClicked();
+            items.add(item);
+            objectsVBox.getChildren().add(item);
+        }
+    }
+
+    private void remove(Item item) {
+        //objectsVBox.getChildren().remove(item);
     }
 
     @FXML
     public void LogoutButtonClick(ActionEvent event) {
-        if (serverClient == null) {
-            serverClient = ServerClient.ConnectToServer();
-        }
-        serverClient.SendRequest(new LogoutRequest());
-        serverClient.GetResponse();
-        LoadNewScene(event, "login-view.fxml");
+        mainMenuModule.LogOut();
+        LoadLoginScene(event, "login-view.fxml");
     }
 
     @FXML
-    public void SearchButtonClick(){
+    public void SearchFieldTyped(){
         objectsVBox.getChildren().clear();
         for(var item:items){
             if(item.GetTitle().contains(searchField.getText()))
                 objectsVBox.getChildren().add(item);
             }
         }
-    private void LoadNewScene(ActionEvent event, String sceneName) {
+    private void LoadLoginScene(ActionEvent event, String sceneName) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -76,38 +90,5 @@ public class MainMenuController {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-    }
-
-    @FXML
-    private void fun() {
-        for (int i = 0; i < 10; i++) {
-            Item item = new Item();
-            item.SetTitle(item.GetTitle() + i + 1);
-            item.setOnMouseClicked(s -> {
-                remove(item);
-            });
-            items.add(item);
-            objectsVBox.getChildren().add(item);
-        }
-    }
-
-    public void SetContent(ArrayList<Content> contentList){
-        for(var content:contentList) {
-            Item item = new Item();
-            item.SetTitle(content.getContentName());
-            item.SetPrice(content.getContentPrice() + "$");
-            item.setOnMouseClicked((event)->remove(item));
-            items.add(item);
-            objectsVBox.getChildren().add(item);
-        }
-    }
-
-    private void remove(Item item) {
-        objectsVBox.getChildren().remove(item);
-    }
-
-    @FXML
-    private void clear() {
-        objectsVBox.getChildren().clear();
     }
 }

@@ -8,12 +8,15 @@ public enum UserQueries {
             "inner join kp.currency on currencyid = user.currensyid" +
             "where currencyid = ?");
 
+
     private String query;
-    UserQueries(String query){
+
+    UserQueries(String query) {
         this.query = query;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return query;
     }
 }

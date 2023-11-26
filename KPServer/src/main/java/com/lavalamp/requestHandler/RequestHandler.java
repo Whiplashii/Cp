@@ -1,5 +1,6 @@
 package com.lavalamp.requestHandler;
 
+import com.lavalamp.JDBC.ContentDAO;
 import com.lavalamp.JDBC.UserDAO;
 import pojo.User;
 import request.GetContentRequest;
@@ -10,6 +11,7 @@ import response.*;
 
 public class RequestHandler {
     private UserDAO userDAO;
+    private ContentDAO contentDAO;
     private User user = null;
 
     public IResponse HandleRequest(LoginRequest loginRequest) {
@@ -20,9 +22,7 @@ public class RequestHandler {
         User responseUser = user;
         String context = "";
         if(user != null){
-            responseUser.setId(null);
             responseUser.setWallet(user.getWallet() * userDAO.GetCurrencyRate(user.getUserCurrencyID()));
-            System.err.println(user.getId());
         }
         else{
             context = "Неверный логин или пароль";
@@ -39,7 +39,6 @@ public class RequestHandler {
         registrationResponse.accepted = userDAO.InsertNewUser((User) registrationRequest.GetPOJO());
         return registrationResponse;
     }
-
     public IResponse HandleRequest(LogoutRequest logoutRequest) {
         user = null;
         userDAO.CloseConnection();
@@ -48,8 +47,11 @@ public class RequestHandler {
         return new LogoutResponse();
     }
     public IResponse HandleRequest(GetContentRequest getContentRequest){
+        if(contentDAO == null){
+            contentDAO = new ContentDAO();
+        }
         GetContentResponse getContentResponse = new GetContentResponse();
-        getContentResponse.contentList = userDAO.GetContent();
+        getContentResponse.contentList = contentDAO.GetContent();
         return getContentResponse;
     }
 }

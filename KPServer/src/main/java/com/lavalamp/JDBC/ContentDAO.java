@@ -22,11 +22,8 @@ public class ContentDAO {
             ArrayList<Content> contentList = new ArrayList<>();
             PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.getContent.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
-            /*while (resultSet.next()){
+            while (resultSet.next()){
                 contentList.add(GetContentFromResultSet(resultSet));
-            }*/
-            for(int i = 0;i < 10;i++){
-                contentList.add(new Content());
             }
             return contentList;
         } catch (SQLException e) {
@@ -36,7 +33,7 @@ public class ContentDAO {
     private Content GetContentFromResultSet(ResultSet resultSet)throws SQLException{
         Content content = new Content();
         content.setContentName(resultSet.getString("contentname"));
-        content.setContentDescription("");
+        content.setContentDescription("contentdescription");
         content.setContentPrice(resultSet.getFloat("contentprice"));
         content.setContentTypeID(resultSet.getInt("contenttypeid"));
         content.setDate(resultSet.getDate("dateadd"));
@@ -120,5 +117,22 @@ public class ContentDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public ArrayList<Content> GetUsersLibrary(int userID){
+        if(connection == null){
+            connection = JDBCConnector.GetConnection();
+        }
+        ArrayList<Content> contentList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.getUserLibrary.toString());
+            preparedStatement.setInt(1,userID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                contentList.add(GetContentFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        return contentList;
     }
 }

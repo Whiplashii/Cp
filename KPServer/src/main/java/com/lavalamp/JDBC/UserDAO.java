@@ -95,7 +95,6 @@ public class UserDAO {
         }
         return user;
     }
-
     public float GetCurrencyRate(int currencyID){
         if(connection == null){
             connection = JDBCConnector.GetConnection();
@@ -113,6 +112,8 @@ public class UserDAO {
         }
         return currencyID;
     }
+
+
     public void CloseConnection(){
         try {
             connection.close();
