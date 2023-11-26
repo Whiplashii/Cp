@@ -44,10 +44,11 @@ public class LoginController {
         System.out.println(passwordField.getText());
         User user = new User(userName.getText(),passwordField.getText());
         LoginResponse loginResponse = loginModule.LogIn(user);
-        if(!loginResponse.accessGranted){
+        if(loginResponse.getUser() == null){
+            System.out.println(loginResponse.getContext());
             return;
         }
-        DecideMainMenuType(event, user);
+        DecideMainMenuType(event, loginResponse.getUser());
     }
     @FXML
     public void onRegistrationButtonClick(ActionEvent event) {
@@ -71,6 +72,7 @@ public class LoginController {
 
             MainMenuController mainMenuController = loader.getController();
             mainMenuController.Initialize(user,getContentResponse.contentList);
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

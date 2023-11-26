@@ -10,17 +10,24 @@ import response.*;
 
 public class RequestHandler {
     private UserDAO userDAO;
-    private User user;
+    private User user = null;
 
     public IResponse HandleRequest(LoginRequest loginRequest) {
         if (userDAO == null) {
             userDAO = new UserDAO();
         }
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.accessGranted = userDAO.FindUserByLogin((User) loginRequest.GetPOJO());
-        if (loginResponse.accessGranted) {
-            user = (User) loginRequest.GetPOJO();
+        user = userDAO.FindUserByLogin((User)loginRequest.GetPOJO());
+        User responseUser = user;
+        String context = "";
+        if(user != null){
+            responseUser.setId(null);
+            responseUser.setWallet(user.getWallet() * userDAO.GetCurrencyRate(user.getUserCurrencyID()));
+            System.err.println(user.getId());
         }
+        else{
+            context = "Неверный логин или пароль";
+        }
+        LoginResponse loginResponse = new LoginResponse(responseUser,context);
         return loginResponse;
     }
 

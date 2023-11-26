@@ -1,6 +1,10 @@
 //user
 INSERT INTO `kp`.`user` (`username`, `useremail`, `userpassword`, `usersalt`, `wallet`, `userroleid`, `currensyid`, `isbanned`) VALUES ('user', 'user@mail.ru', 'user', 'u', '12', '1', '1', '0');
 
+//user currency
+select currencyname, currensyrate from kp.user
+inner join kp.currency on currencyid = user.currensyid
+
 
 //content
 INSERT INTO `kp`.`content` (`contentname`, `contentdescription`, `contentprice`, `contenttypeid`, `userid`, `currensyid`) VALUES ('name', 'контент для тупых дыбилов', '30', '1', '11', '1');

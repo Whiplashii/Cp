@@ -11,4 +11,12 @@ public enum UserRole {
     public int getInt(){
         return value;
     }
+    public static UserRole setInt(int integer){
+        return switch (integer) {
+            case 1 -> user;
+            case 2 -> admin;
+            case 3 -> creator;
+            default -> null;
+        };
+    }
 }

@@ -1,12 +1,11 @@
 package pojo;
 
-
-
 import enums.UserRole;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private Integer id;
     private String userName;
     private String password;
     private String email;
@@ -97,5 +96,13 @@ public class User implements Serializable {
 
     public void setUserCurrencyID(int userCurrencyID) {
         this.userCurrencyID = userCurrencyID;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

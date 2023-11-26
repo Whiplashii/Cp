@@ -1,6 +1,7 @@
 package com.lavalamp.JDBC;
 
 import com.lavalamp.hashing.HashGenerator;
+import enums.UserRole;
 import enums.sqlqueries.UserQueries;
 import pojo.Content;
 import pojo.User;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 public class UserDAO {
     private User user;
     private Connection connection;
-
     public ArrayList<Content> GetContent() {
         if(connection == null){
             connection = JDBCConnector.GetConnection();
@@ -46,7 +46,6 @@ public class UserDAO {
             connection = JDBCConnector.GetConnection();
         }
         try {
-            //todo implement inserting User
             PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.insertUser.toString());
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getEmail());
@@ -55,17 +54,16 @@ public class UserDAO {
             preparedStatement.setFloat(5,user.getWallet());
             preparedStatement.setInt(6,user.getUserRole().getInt());
             preparedStatement.setInt(7,1);
-            return preparedStatement.execute();
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    public boolean FindUserByLogin(User user) {
+    public User FindUserByLogin(User user) {
         if (connection == null) {
             connection = JDBCConnector.GetConnection();
         }
-        boolean userExists = false;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.findUserByLogin.toString());
             preparedStatement.setString(1,user.getUserName());
@@ -73,16 +71,47 @@ public class UserDAO {
             if(resultSet.next())
             {
                 String salt = resultSet.getString("usersalt");
+                boolean isBanned = resultSet.getInt("isbanned") != 0;
                 String password = resultSet.getString("userpassword");
                 String hashedPassword = HashGenerator.GenerateHashedPassword(user.getPassword() + salt);
-                if(password.equals(hashedPassword)){
-                    userExists = true;
+                if(password.equals(hashedPassword) && !isBanned){
+                    user.setPassword(null);
+                    user.setUserSalt(null);
+                    user.setId(resultSet.getInt("userid"));
+                    user.setUserRole(UserRole.setInt(resultSet.getInt("userroleid")));
+                    user.setWallet(resultSet.getFloat("wallet"));
+                    user.setUserCurrencyID(resultSet.getInt("currensyid"));
                 }
+                else {
+                    user = null;
+                }
+            }
+            else{
+                user = null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return userExists;
+        return user;
+    }
+
+    public float GetCurrencyRate(int currencyID){
+        if(connection == null){
+            connection = JDBCConnector.GetConnection();
+        }
+        float currencyRate = 1.0f;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.getCurrencyRate.toString());
+            preparedStatement.setInt(1,currencyID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                currencyRate = resultSet.getFloat("currensyrate");
+            }
+        } catch (SQLException e) {
+            return currencyRate;
+        }
+        return currencyID;
     }
     public void CloseConnection(){
         try {
