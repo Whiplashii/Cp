@@ -33,6 +33,7 @@
          </children>
       </VBox>
       <Separator layoutY="99.0" prefHeight="1.0" prefWidth="250.0" />
+      <Button fx:id="clickableArea" mnemonicParsing="false" prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: transparent;" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

@@ -10,7 +10,6 @@ import response.GetLibraryResponse;
 public class MainMenuModule {
 
     private final ServerClient serverClient;
-    float x;
     public MainMenuModule(){
         serverClient = ServerClient.ConnectToServer();
     }

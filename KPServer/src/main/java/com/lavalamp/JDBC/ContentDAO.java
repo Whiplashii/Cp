@@ -32,6 +32,7 @@ public class ContentDAO {
     }
     private Content GetContentFromResultSet(ResultSet resultSet)throws SQLException{
         Content content = new Content();
+        content.setContentID(resultSet.getInt("contentid"));
         content.setContentName(resultSet.getString("contentname"));
         content.setContentDescription("contentdescription");
         content.setContentPrice(resultSet.getFloat("contentprice"));

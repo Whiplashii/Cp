@@ -58,6 +58,7 @@ public class MainMenuController {
             Item item = new Item();
             item.setItemID(content.getContentID());
             item.SetTitle(content.getContentName());
+            item.getClickableArea().setOnAction((event -> OnItemCLicked(event,item.getItemID())));
             item.SetPrice(content.getContentPrice() + "$");
             items.add(item);
             objectsVBox.getChildren().add(item);
@@ -65,7 +66,12 @@ public class MainMenuController {
     }
 
     @FXML
-    public void LogoutButtonClick(ActionEvent event) {
+    private void OnItemCLicked(ActionEvent event,int itemID) {
+        System.err.println(itemID);
+    }
+
+    @FXML
+    private void LogoutButtonClick(ActionEvent event) {
         mainMenuModule.LogOut();
         LoadLoginScene(event, "login-view.fxml");
     }

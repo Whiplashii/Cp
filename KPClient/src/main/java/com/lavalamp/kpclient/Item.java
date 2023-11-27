@@ -2,6 +2,7 @@ package com.lavalamp.kpclient;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -15,7 +16,8 @@ public class Item extends Pane {
     private TextField itemTitle;
     @FXML
     private TextField itemPrice;
-
+    @FXML
+    private Button clickableArea;
     public Item() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "content-item.fxml"));
@@ -55,5 +57,9 @@ public class Item extends Pane {
 
     public void setPriceVisible(boolean isVisible){
         itemPrice.setVisible(isVisible);
+    }
+
+    public Button getClickableArea() {
+        return clickableArea;
     }
 }
