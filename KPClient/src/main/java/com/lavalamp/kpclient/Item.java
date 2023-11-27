@@ -2,12 +2,9 @@ package com.lavalamp.kpclient;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
 
 public class Item extends Pane {
@@ -48,7 +45,6 @@ public class Item extends Pane {
         itemPrice.setText(price);
     }
 
-
     public int getItemID() {
         return itemID;
     }
@@ -57,4 +53,7 @@ public class Item extends Pane {
         this.itemID = itemID;
     }
 
+    public void setPriceVisible(boolean isVisible){
+        itemPrice.setVisible(isVisible);
+    }
 }

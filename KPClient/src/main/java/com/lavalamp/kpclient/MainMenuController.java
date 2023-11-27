@@ -11,11 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
 import pojo.User;
+import response.GetLibraryResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,34 +36,29 @@ public class MainMenuController {
     @FXML
     private VBox objectsVBox;
 
-    public MainMenuController(){
+    public MainMenuController() {
         mainMenuModule = new MainMenuModule();
     }
 
-    public void Initialize(User user,ArrayList<Content> contentList) {
+    public void Initialize(User user, ArrayList<Content> contentList) {
         this.user = Objects.requireNonNullElseGet(user, User::new);
         userNameLabel.setText(this.user.getUserName());
         userWalletLabel.setText(this.user.getWallet() + "$");
-        if(user.getUserRole() != UserRole.creator) {
+        if (user.getUserRole() != UserRole.creator) {
             addContentButton.setDisable(true);
         }
         SetContent(contentList);
     }
-    public void SetContent(ArrayList<Content> contentList){
-        for(var content:contentList) {
+
+    public void SetContent(ArrayList<Content> contentList) {
+        for (var content : contentList) {
             Item item = new Item();
             item.setItemID(content.getContentID());
             item.SetTitle(content.getContentName());
             item.SetPrice(content.getContentPrice() + "$");
-            item.setOnMouseClicked((event)->remove(item));
-            item.getOnMouseClicked();
             items.add(item);
             objectsVBox.getChildren().add(item);
         }
-    }
-
-    private void remove(Item item) {
-        //objectsVBox.getChildren().remove(item);
     }
 
     @FXML
@@ -73,13 +68,24 @@ public class MainMenuController {
     }
 
     @FXML
-    public void SearchFieldTyped(){
+    public void SearchFieldTyped() {
         objectsVBox.getChildren().clear();
-        for(var item:items){
-            if(item.GetTitle().contains(searchField.getText()))
+        for (var item : items) {
+            if (item.GetTitle().contains(searchField.getText()))
                 objectsVBox.getChildren().add(item);
-            }
         }
+    }
+
+    @FXML
+    public void LibraryButtonClick(ActionEvent event){
+        GetLibraryResponse response = mainMenuModule.GetLibrary();
+        if(response.getContentList() == null){
+            System.out.println(response.getContext());
+            return;
+        }
+        LoadLibraryScene(event,response.getContentList());
+    }
+
     private void LoadLoginScene(ActionEvent event, String sceneName) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
@@ -89,6 +95,22 @@ public class MainMenuController {
             stage.show();
         } catch (IOException ioException) {
             ioException.printStackTrace();
+        }
+    }
+    private void LoadLibraryScene(ActionEvent event, ArrayList<Content> contentList){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("user-library.fxml"));
+            Parent root = loader.load();
+
+            UserLibraryController Controller = loader.getController();
+            Controller.Initialize(user, contentList);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

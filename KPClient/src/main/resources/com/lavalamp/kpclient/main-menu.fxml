@@ -25,7 +25,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Библиотека">
+            <Button mnemonicParsing="false" onAction="#LibraryButtonClick" text="Библиотека">
                <font>
                   <Font size="14.0" />
                </font>

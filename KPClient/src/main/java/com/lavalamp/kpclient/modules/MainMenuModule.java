@@ -1,7 +1,9 @@
 package com.lavalamp.kpclient.modules;
 
 import client.ServerClient;
+import request.GetLibraryRequest;
 import request.LogoutRequest;
+import response.GetLibraryResponse;
 
 public class MainMenuModule {
 
@@ -14,5 +16,9 @@ public class MainMenuModule {
     public void LogOut(){
         serverClient.SendRequest(new LogoutRequest());
         serverClient.GetResponse();
+    }
+    public GetLibraryResponse GetLibrary(){
+        serverClient.SendRequest(new GetLibraryRequest());
+        return (GetLibraryResponse) serverClient.GetResponse();
     }
 }

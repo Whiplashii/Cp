@@ -131,6 +131,7 @@ public class ContentDAO {
                 contentList.add(GetContentFromResultSet(resultSet));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
         return contentList;

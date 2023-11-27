@@ -112,13 +112,14 @@ public class UserDAO {
         }
         return currencyID;
     }
-
-
     public void CloseConnection(){
         try {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void BecomeCreator(int userID){
+
     }
 }
