@@ -6,7 +6,8 @@ public enum UserQueries {
             "VALUES (?, ?, ?, ?, ?, ?, ?, '0')"),
     getCurrencyRate("select currencyname, currensyrate from kp.user\n" +
             "inner join kp.currency on currencyid = user.currensyid" +
-            "where currencyid = ?");
+            "where currencyid = ?"),
+    becomeCreator("UPDATE user SET userroleid = ? where userid = ?");
 
 
     private String query;

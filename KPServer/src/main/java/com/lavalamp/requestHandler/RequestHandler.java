@@ -75,4 +75,17 @@ public class RequestHandler {
         }
         return new GetLibraryResponse(contentList,context);
     }
+    public IResponse HandleRequest(BecomeCreatorRequest request){
+        if(userDAO == null){
+            userDAO = new UserDAO();
+        }
+        if(user.getUserRole() != UserRole.user){
+            return new BecomeCreatorResponse(null,"Вы не можете стать создателем");
+        }
+        if(!userDAO.BecomeCreator(user.getId())){
+            return new BecomeCreatorResponse(null,"Возникла ошибка");
+        }
+        user.setUserRole(UserRole.creator);
+        return new BecomeCreatorResponse(user,"");
+    }
 }

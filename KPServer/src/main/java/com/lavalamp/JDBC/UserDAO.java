@@ -119,7 +119,19 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
     }
-    public void BecomeCreator(int userID){
-
+    public boolean BecomeCreator(int userID){
+        if(connection == null){
+            connection = JDBCConnector.GetConnection();
+        }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.becomeCreator.toString());
+            preparedStatement.setInt(1,UserRole.creator.getInt());
+            preparedStatement.setInt(2,userID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

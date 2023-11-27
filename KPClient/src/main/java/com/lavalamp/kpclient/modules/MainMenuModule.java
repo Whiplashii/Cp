@@ -1,8 +1,10 @@
 package com.lavalamp.kpclient.modules;
 
 import client.ServerClient;
+import request.BecomeCreatorRequest;
 import request.GetLibraryRequest;
 import request.LogoutRequest;
+import response.BecomeCreatorResponse;
 import response.GetLibraryResponse;
 
 public class MainMenuModule {
@@ -20,5 +22,9 @@ public class MainMenuModule {
     public GetLibraryResponse GetLibrary(){
         serverClient.SendRequest(new GetLibraryRequest());
         return (GetLibraryResponse) serverClient.GetResponse();
+    }
+    public BecomeCreatorResponse BecomeCreator(){
+        serverClient.SendRequest(new BecomeCreatorRequest());
+        return (BecomeCreatorResponse) serverClient.GetResponse();
     }
 }

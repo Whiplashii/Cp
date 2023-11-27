@@ -28,6 +28,8 @@ public class MainMenuController {
     @FXML
     private Button addContentButton;
     @FXML
+    private Button becomeContentButton;
+    @FXML
     private Label userNameLabel;
     @FXML
     private Label userWalletLabel;
@@ -46,6 +48,7 @@ public class MainMenuController {
         userWalletLabel.setText(this.user.getWallet() + "$");
         if (user.getUserRole() != UserRole.creator) {
             addContentButton.setDisable(true);
+            becomeContentButton.setDisable(true);
         }
         SetContent(contentList);
     }
@@ -84,6 +87,18 @@ public class MainMenuController {
             return;
         }
         LoadLibraryScene(event,response.getContentList());
+    }
+
+    @FXML
+    public void BecomeCreatorButtonClick(ActionEvent event){
+     var response= mainMenuModule.BecomeCreator();
+     if(response.getUser() == null){
+         System.out.println(response.getContext());
+         return;
+     }
+     user = response.getUser();
+     addContentButton.setDisable(false);
+     becomeContentButton.setDisable(true);
     }
 
     private void LoadLoginScene(ActionEvent event, String sceneName) {

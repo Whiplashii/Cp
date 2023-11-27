@@ -74,6 +74,7 @@
                   </Button>
                </children>
             </HBox>
+            <Button fx:id="becomeContentButton" mnemonicParsing="false" onAction="#BecomeCreatorButtonClick" text="Стать создателем контента" />
          </children>
       </VBox>
    </left>
