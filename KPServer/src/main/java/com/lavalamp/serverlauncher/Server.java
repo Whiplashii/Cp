@@ -74,6 +74,9 @@ public class Server implements Runnable {
         if(request.getClass() == BuyContentRequest.class) {
             return requestHandler.HandleRequest((BuyContentRequest) request);
         }
+        if(request.getClass() == AddMoneyRequest.class){
+            return requestHandler.HandleRequest((AddMoneyRequest) request);
+        }
         return null;
     }
 

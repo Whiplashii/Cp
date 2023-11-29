@@ -30,7 +30,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Пополнить счет">
+            <Button mnemonicParsing="false" onAction="#AddMoneyButtonClick" text="Пополнить счет">
                <font>
                   <Font size="14.0" />
                </font></Button>

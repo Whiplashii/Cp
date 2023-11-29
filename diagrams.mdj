@@ -3046,7 +3046,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1920,
+											"left": 1840,
 											"top": 1072,
 											"height": 13
 										},
@@ -3057,11 +3057,11 @@
 												"$ref": "AAAAAAGLw+PVvKZTCWo="
 											},
 											"font": "Arial;13;1",
-											"left": 1114,
+											"left": 1086,
 											"top": 643.5,
-											"width": 90,
+											"width": 146,
 											"height": 13,
-											"text": "CRUD контент"
+											"text": "Управление контентом"
 										},
 										{
 											"_type": "LabelView",
@@ -3071,7 +3071,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1920,
+											"left": 1840,
 											"top": 1072,
 											"width": 80.9072265625,
 											"height": 13,
@@ -3085,16 +3085,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1920,
+											"left": 1840,
 											"top": 1072,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 1109,
+									"left": 1081,
 									"top": 636.5,
-									"width": 101.10791015625,
+									"width": 157.595703125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGLw+PVvKZUukQ="
@@ -3120,7 +3120,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 960,
+									"left": 920,
 									"top": 536,
 									"width": 10,
 									"height": 10
@@ -3136,7 +3136,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 960,
+									"left": 920,
 									"top": 536,
 									"width": 10,
 									"height": 10
@@ -3152,7 +3152,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 960,
+									"left": 920,
 									"top": 536,
 									"width": 10,
 									"height": 10
@@ -3168,7 +3168,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 960,
+									"left": 920,
 									"top": 536,
 									"width": 10,
 									"height": 10
@@ -3184,7 +3184,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 960,
+									"left": 920,
 									"top": 536,
 									"width": 10,
 									"height": 10
@@ -3192,9 +3192,9 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 1088,
+							"left": 1048,
 							"top": 632,
-							"width": 142,
+							"width": 222,
 							"height": 35,
 							"nameCompartment": {
 								"$ref": "AAAAAAGLw+PVvKZTCWo="
@@ -12207,7 +12207,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGLw+Bo1necXBU="
 					},
-					"name": "CRUD контент"
+					"name": "Управление контентом"
 				},
 				{
 					"_type": "UMLUseCase",

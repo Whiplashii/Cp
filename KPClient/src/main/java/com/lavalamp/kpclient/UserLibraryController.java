@@ -44,7 +44,6 @@ public class UserLibraryController {
 
     @FXML
     private void BackButtonClick(ActionEvent event) {
-        userLibraryModule.GetBackToMain();
         ArrayList<Content> contentList =  userLibraryModule.GetContent();
         LoadMainMenu(event,contentList);
     }

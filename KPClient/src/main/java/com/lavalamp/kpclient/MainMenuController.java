@@ -17,7 +17,6 @@ import pojo.Content;
 import pojo.User;
 import response.BuyContentResponse;
 import response.GetLibraryResponse;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -123,6 +122,28 @@ public class MainMenuController {
      user = response.getUser();
      addContentButton.setDisable(false);
      becomeContentButton.setDisable(true);
+    }
+
+    @FXML
+    public void AddMoneyButtonClick(ActionEvent event){
+        LoadAddCurrency(event);
+    }
+
+    private void LoadAddCurrency(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-currency-view.fxml"));
+            Parent root = loader.load();
+
+            AddCurrencyController Controller = loader.getController();
+            Controller.Initialize(user);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void LoadLoginScene(ActionEvent event, String sceneName) {

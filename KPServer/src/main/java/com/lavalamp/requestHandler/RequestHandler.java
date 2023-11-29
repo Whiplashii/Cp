@@ -8,7 +8,6 @@ import pojo.User;
 import request.*;
 import response.*;
 
-import java.util.ArrayList;
 
 public class RequestHandler {
     private UserDAO userDAO;
@@ -117,5 +116,16 @@ public class RequestHandler {
             return new BuyContentResponse(user1,"");
         }
         return new BuyContentResponse(null,"Возникла ошибка");
+    }
+    public IResponse HandleRequest(AddMoneyRequest addMoneyRequest){
+        if(userDAO == null){
+            userDAO = new UserDAO();
+        }
+        float value = user.getWallet() + (Float)addMoneyRequest.GetPOJO();
+        userDAO.ChangeMoney(user.getId(),value);
+        user.setWallet(value);
+        User user1 = new User();
+        user1.setWallet(value);
+        return new AddMoneyResponse(user1,"");
     }
 }
