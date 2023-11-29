@@ -1,10 +1,13 @@
 package com.lavalamp.kpclient.modules;
 
 import client.ServerClient;
+import pojo.Content;
 import request.BecomeCreatorRequest;
+import request.BuyContentRequest;
 import request.GetLibraryRequest;
 import request.LogoutRequest;
 import response.BecomeCreatorResponse;
+import response.BuyContentResponse;
 import response.GetLibraryResponse;
 
 public class MainMenuModule {
@@ -25,5 +28,10 @@ public class MainMenuModule {
     public BecomeCreatorResponse BecomeCreator(){
         serverClient.SendRequest(new BecomeCreatorRequest());
         return (BecomeCreatorResponse) serverClient.GetResponse();
+    }
+
+    public BuyContentResponse BuyContent(Content content) {
+        serverClient.SendRequest(new BuyContentRequest(content));
+        return (BuyContentResponse) serverClient.GetResponse();
     }
 }

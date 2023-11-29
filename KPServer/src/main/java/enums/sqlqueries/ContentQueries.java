@@ -9,7 +9,10 @@ public enum ContentQueries {
     getContent("select * from content"),
     getUserLibrary("Select contentid,contentname,contentdescription,contentprice,contenttypeid,content.userid,dateadd,currensyid from usercontent "+
             "inner join kp.content on usercontentid = contentid "+
-            "where kp.usercontent.userid = ?");
+            "where kp.usercontent.userid = ?"),
+    getContentPrice("select contentprice, currencyrate from content " +
+            "inner join currency on currencyid = currensyid " +
+            "where contentid = ?");
     private String query;
     ContentQueries(String query){
         this.query = query;

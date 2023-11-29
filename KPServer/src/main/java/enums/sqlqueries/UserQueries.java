@@ -7,8 +7,9 @@ public enum UserQueries {
     getCurrencyRate("select currencyname, currensyrate from kp.user\n" +
             "inner join kp.currency on currencyid = user.currensyid" +
             "where currencyid = ?"),
-    becomeCreator("UPDATE user SET userroleid = ? where userid = ?");
-
+    becomeCreator("UPDATE user SET userroleid = ? where userid = ?"),
+    buyContent("INSERT INTO usercontent (`userid`, `usercontentid`) VALUES (?, ?)"),
+    changeMoney("UPDATE user SET wallet = ? WHERE (`userid` = ?)");
 
     private String query;
 

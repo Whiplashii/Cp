@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
 import pojo.User;
+import response.BuyContentResponse;
 import response.GetLibraryResponse;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class MainMenuController {
     @FXML
     private Label userWalletLabel;
     private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Content> contentList = new ArrayList<>();
     private User user;
     @FXML
     private VBox objectsVBox;
@@ -46,6 +48,7 @@ public class MainMenuController {
         this.user = Objects.requireNonNullElseGet(user, User::new);
         userNameLabel.setText(this.user.getUserName());
         userWalletLabel.setText(this.user.getWallet() + "$");
+        this.contentList = contentList;
         if (user.getUserRole() != UserRole.creator) {
             addContentButton.setDisable(true);
             becomeContentButton.setDisable(true);
@@ -67,7 +70,22 @@ public class MainMenuController {
 
     @FXML
     private void OnItemCLicked(ActionEvent event,int itemID) {
-        System.err.println(itemID);
+        BuyContentResponse response =  mainMenuModule.BuyContent(GetContentById(itemID));
+        if(response.getUser() == null){
+            System.out.println(response.getContext());
+            return;
+        }
+        user.setWallet(response.getUser().getWallet());
+        userWalletLabel.setText(user.getWallet() + "$");
+    }
+
+    private Content GetContentById(int id){
+        for(var content:contentList){
+            if(content.getContentID() == id){
+                return content;
+            }
+        }
+        return null;
     }
 
     @FXML

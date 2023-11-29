@@ -137,4 +137,22 @@ public class ContentDAO {
         }
         return contentList;
     }
+    public float GetContentPrice(int contentID){
+        if(connection == null){
+            connection = JDBCConnector.GetConnection();
+        }
+        float price = -1.0f;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.getContentPrice.toString());
+            preparedStatement.setInt(1,contentID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                price = resultSet.getFloat("contentprice") * resultSet.getFloat("currencyrate");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return price;
+    }
 }

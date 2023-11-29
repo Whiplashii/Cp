@@ -71,6 +71,9 @@ public class Server implements Runnable {
         if(request.getClass() == BecomeCreatorRequest.class) {
             return requestHandler.HandleRequest((BecomeCreatorRequest) request);
         }
+        if(request.getClass() == BuyContentRequest.class) {
+            return requestHandler.HandleRequest((BuyContentRequest) request);
+        }
         return null;
     }
 

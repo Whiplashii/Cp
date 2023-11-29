@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserDAO {
+
     private User user;
     private Connection connection;
     public ArrayList<Content> GetContent() {
@@ -133,5 +134,36 @@ public class UserDAO {
             return false;
         }
         return true;
+    }
+
+    public boolean BuyContent(int userID, int contentID){
+        if (connection == null){
+            connection = JDBCConnector.GetConnection();
+        }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.buyContent.toString());
+            preparedStatement.setInt(1,userID);
+            preparedStatement.setInt(2,contentID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+         return false;
+        }
+        return true;
+    }
+    public void ChangeMoney(int userID,float moneyValue){
+        {
+            if (connection == null){
+                connection = JDBCConnector.GetConnection();
+            }
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.changeMoney.toString());
+                preparedStatement.setFloat(1,moneyValue);
+                preparedStatement.setInt(2,userID);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

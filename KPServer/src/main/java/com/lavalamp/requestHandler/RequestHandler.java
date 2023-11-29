@@ -3,6 +3,7 @@ package com.lavalamp.requestHandler;
 import com.lavalamp.JDBC.ContentDAO;
 import com.lavalamp.JDBC.UserDAO;
 import enums.UserRole;
+import pojo.Content;
 import pojo.User;
 import request.*;
 import response.*;
@@ -87,5 +88,34 @@ public class RequestHandler {
         }
         user.setUserRole(UserRole.creator);
         return new BecomeCreatorResponse(user,"");
+    }
+
+    public IResponse HandleRequest(BuyContentRequest request){
+        if(userDAO == null){
+            userDAO = new UserDAO();
+        }
+        if(contentDAO == null){
+            contentDAO = new ContentDAO();
+        }
+        if(user.getUserRole().equals(UserRole.admin)){
+            return new BuyContentResponse(null,"Вы не можете покупать товары");
+        }
+        float contentPrice = contentDAO.GetContentPrice(((Content)request.GetPOJO()).getContentID());
+        float userCurrencyRate = userDAO.GetCurrencyRate(user.getUserCurrencyID());
+        float userWallet = user.getWallet() * userCurrencyRate;
+        if(contentPrice < 0){
+            return new BuyContentResponse(null,"Произошла ошибка");
+        }
+        if(userWallet < contentPrice){
+            return new BuyContentResponse(null,"Не достаточно денег");
+        }
+        if(userDAO.BuyContent(user.getId(), ((Content) request.GetPOJO()).getContentID())){
+            user.setWallet((userWallet - contentPrice)/userCurrencyRate);
+            userDAO.ChangeMoney(user.getId(),user.getWallet());
+            User user1 = new User();
+            user1.setWallet(user.getWallet());
+            return new BuyContentResponse(user1,"");
+        }
+        return new BuyContentResponse(null,"Возникла ошибка");
     }
 }
