@@ -1,5 +1,7 @@
 package com.lavalamp.kpclient.contollers;
 
+import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.modules.AddContentScreenModule;
 import com.lavalamp.kpclient.modules.ContentManagementModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,14 +25,15 @@ public class ContentManagementController {
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Content> contentList = new ArrayList<>();
     private User user;
-    public ContentManagementController(){
+
+    public ContentManagementController() {
         contentManagementModule = new ContentManagementModule();
     }
 
-    public void Initialize(User user){
+    public void Initialize(User user) {
         this.user = user;
         contentList = contentManagementModule.GetCreatorsContent();
-    SetContent();
+        SetContent();
     }
 
     public void SetContent() {
@@ -38,29 +41,32 @@ public class ContentManagementController {
             Item item = new Item();
             item.setItemID(content.getContentID());
             item.SetTitle(content.getContentName());
-            item.getClickableArea().setOnAction((event -> OnContentClick(event,item.getItemID())));
+            item.getClickableArea().setOnAction((event -> OnContentClick(event, item.getItemID())));
             item.SetPrice(content.getContentPrice() + "$");
             items.add(item);
             itemsVBox.getChildren().add(item);
         }
     }
+
     @FXML
-    private void LogoutButtonClick(ActionEvent event){
+    private void LogoutButtonClick(ActionEvent event) {
         var contentList = contentManagementModule.GetContent();
-        LoadMainMenu(event,contentList);
-    }
-    @FXML
-    private void AddButtonCLick(ActionEvent event){
-        LoadAddScreen(event,null);
+        LoadMainMenu(event, contentList);
     }
 
-    private void OnContentClick(ActionEvent event,int id){
-    var content = GetContentById(id);
-    LoadAddScreen(event,content);
+    @FXML
+    private void AddButtonCLick(ActionEvent event) {
+        LoadAddScreen(event, null);
     }
-    private Content GetContentById(int id){
-        for(var content:contentList){
-            if(content.getContentID() == id){
+
+    private void OnContentClick(ActionEvent event, int id) {
+        var content = GetContentById(id);
+        LoadAddScreen(event, content);
+    }
+
+    private Content GetContentById(int id) {
+        for (var content : contentList) {
+            if (content.getContentID() == id) {
                 return content;
             }
         }
@@ -69,7 +75,7 @@ public class ContentManagementController {
 
     private void LoadMainMenu(ActionEvent event, ArrayList<Content> contentList) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("main-menu.fxml"));
             Parent root = loader.load();
 
             MainMenuController mainMenuController = loader.getController();
@@ -84,13 +90,13 @@ public class ContentManagementController {
         }
     }
 
-    private void LoadAddScreen(ActionEvent event,Content content) {
+    private void LoadAddScreen(ActionEvent event, Content content) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("add-content-view.fxml"));
             Parent root = loader.load();
 
-            MainMenuController mainMenuController = loader.getController();
-            mainMenuController.Initialize(user, contentList);
+            AddContentScreenController mainMenuController = loader.getController();
+            mainMenuController.Initialize(user, content);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -100,5 +106,4 @@ public class ContentManagementController {
             throw new RuntimeException(e);
         }
     }
-
 }
