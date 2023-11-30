@@ -1,5 +1,6 @@
-package com.lavalamp.kpclient;
+package com.lavalamp.kpclient.contollers;
 
+import com.lavalamp.kpclient.Client;
 import com.lavalamp.kpclient.modules.LoginModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import pojo.User;
 import response.LoginResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class LoginController {
     private final LoginModule loginModule;
@@ -44,7 +44,7 @@ public class LoginController {
     @FXML
     public void onRegistrationButtonClick(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("registration-view.fxml")));
+            Parent root = FXMLLoader.load(Client.class.getResource("registration-view.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -64,7 +64,7 @@ public class LoginController {
     private void LoadMainMenu(ActionEvent event, User user) {
         try {
             ArrayList<Content> contentList = loginModule.GetContent();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("main-menu.fxml"));
             Parent root = loader.load();
 
             MainMenuController mainMenuController = loader.getController();
@@ -81,7 +81,7 @@ public class LoginController {
 
     private void LoadAdminMainMenu(ActionEvent event, User user) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin-main-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("admin-main-menu.fxml"));
             Parent root = loader.load();
 
             AdminMainMenuController adminMainMenuController = loader.getController();

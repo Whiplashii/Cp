@@ -6,4 +6,6 @@ module com.lavalamp.kpclient {
 
     opens com.lavalamp.kpclient to javafx.fxml;
     exports com.lavalamp.kpclient;
+    exports com.lavalamp.kpclient.contollers;
+    opens com.lavalamp.kpclient.contollers to javafx.fxml;
 }

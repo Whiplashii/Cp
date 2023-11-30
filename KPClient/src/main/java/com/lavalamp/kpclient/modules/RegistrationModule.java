@@ -1,7 +1,7 @@
 package com.lavalamp.kpclient.modules;
 
 import client.ServerClient;
-import com.lavalamp.kpclient.RegistrationController;
+import com.lavalamp.kpclient.contollers.RegistrationController;
 import com.lavalamp.kpclient.hashing.HashGenerator;
 import pojo.User;
 import request.RegistrationRequest;

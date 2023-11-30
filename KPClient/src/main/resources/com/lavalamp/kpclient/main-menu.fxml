@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.MainMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.contollers.MainMenuController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="512.0" BorderPane.alignment="CENTER">
         <items>
@@ -20,7 +20,7 @@
                   <Label fx:id="userWalletLabel" text="22.03$" />
                </children>
             </VBox>
-            <Button fx:id="addContentButton" mnemonicParsing="false" text="Добавить">
+            <Button fx:id="addContentButton" mnemonicParsing="false" onAction="#AddButtonCLick" text="Добавить">
                <font>
                   <Font size="14.0" />
                </font>

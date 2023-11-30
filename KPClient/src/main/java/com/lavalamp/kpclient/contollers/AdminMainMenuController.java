@@ -1,6 +1,7 @@
-package com.lavalamp.kpclient;
+package com.lavalamp.kpclient.contollers;
 
 import client.ServerClient;
+import com.lavalamp.kpclient.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,7 +32,7 @@ public class AdminMainMenuController {
     }
     private void LoadNewScene(ActionEvent event, String sceneName) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
+            Parent root = FXMLLoader.load(Client.class.getResource(sceneName));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

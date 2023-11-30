@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1b2330;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.AddCurrencyController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1b2330;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.contollers.AddCurrencyController">
    <children>
       <TextField fx:id="moneyValueTextField" alignment="CENTER" layoutX="233.0" layoutY="175.0" onKeyTyped="#TextFieldChanged" promptText="Введите сумму" />
       <Button fx:id="addMoneyButton" layoutX="249.0" layoutY="253.0" mnemonicParsing="false" onAction="#AddMoneyButtonClick" prefHeight="25.0" prefWidth="118.0" text="Пополнить" />

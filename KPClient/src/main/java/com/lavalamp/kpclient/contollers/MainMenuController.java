@@ -1,5 +1,6 @@
-package com.lavalamp.kpclient;
+package com.lavalamp.kpclient.contollers;
 
+import com.lavalamp.kpclient.Client;
 import com.lavalamp.kpclient.modules.MainMenuModule;
 import enums.UserRole;
 import javafx.event.ActionEvent;
@@ -52,10 +53,10 @@ public class MainMenuController {
             addContentButton.setDisable(true);
             becomeContentButton.setDisable(true);
         }
-        SetContent(contentList);
+        SetContent();
     }
 
-    public void SetContent(ArrayList<Content> contentList) {
+    public void SetContent() {
         for (var content : contentList) {
             Item item = new Item();
             item.setItemID(content.getContentID());
@@ -125,13 +126,17 @@ public class MainMenuController {
     }
 
     @FXML
+    private void AddButtonCLick(ActionEvent event){
+        LoadContentManagementScene(event);
+    }
+
+    @FXML
     public void AddMoneyButtonClick(ActionEvent event){
         LoadAddCurrency(event);
     }
-
     private void LoadAddCurrency(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-currency-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("add-currency-view.fxml"));
             Parent root = loader.load();
 
             AddCurrencyController Controller = loader.getController();
@@ -145,10 +150,9 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
     private void LoadLoginScene(ActionEvent event, String sceneName) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
+            Parent root = FXMLLoader.load(Client.class.getResource(sceneName));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -159,11 +163,27 @@ public class MainMenuController {
     }
     private void LoadLibraryScene(ActionEvent event, ArrayList<Content> contentList){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("user-library.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("user-library.fxml"));
             Parent root = loader.load();
 
             UserLibraryController Controller = loader.getController();
             Controller.Initialize(user, contentList);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void LoadContentManagementScene(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("content-management-view.fxml"));
+            Parent root = loader.load();
+
+            ContentManagementController Controller = loader.getController();
+            Controller.Initialize(user);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

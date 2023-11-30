@@ -1,5 +1,7 @@
-package com.lavalamp.kpclient;
+package com.lavalamp.kpclient.contollers;
 
+import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.contollers.MainMenuController;
 import com.lavalamp.kpclient.modules.AddCurrencyModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +72,7 @@ public class AddCurrencyController {
 
     private void LoadMainMenu(ActionEvent event, ArrayList<Content> contentList){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("main-menu.fxml"));
             Parent root = loader.load();
 
             MainMenuController mainMenuController = loader.getController();

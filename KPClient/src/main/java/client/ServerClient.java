@@ -6,6 +6,7 @@ import response.IResponse;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class ServerClient {
@@ -21,8 +22,10 @@ public class ServerClient {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             this.socket = socket;
-        } catch (IOException ioe) {
+        } catch (ConnectException ce){
             serverClient = null;
+            ce.printStackTrace();
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

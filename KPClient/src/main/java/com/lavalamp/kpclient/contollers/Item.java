@@ -1,5 +1,6 @@
-package com.lavalamp.kpclient;
+package com.lavalamp.kpclient.contollers;
 
+import com.lavalamp.kpclient.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -19,8 +20,7 @@ public class Item extends Pane {
     @FXML
     private Button clickableArea;
     public Item() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-                "content-item.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("content-item.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

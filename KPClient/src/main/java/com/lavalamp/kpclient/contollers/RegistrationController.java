@@ -1,5 +1,6 @@
-package com.lavalamp.kpclient;
+package com.lavalamp.kpclient.contollers;
 
+import com.lavalamp.kpclient.Client;
 import com.lavalamp.kpclient.modules.RegistrationModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +40,7 @@ public class RegistrationController {
         if(!registrationResponse.accepted){
             return;
         }
-        TransactToLogin(event);
+        LoadLoginView(event);
     }
 
     private User SetAccount() {
@@ -49,12 +50,12 @@ public class RegistrationController {
 
     @FXML
     protected void OnCancelButtonClick(ActionEvent event) {
-        TransactToLogin(event);
+        LoadLoginView(event);
     }
 
-    private void TransactToLogin(ActionEvent event) {
+    private void LoadLoginView(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(Client.class.getResource("login-view.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

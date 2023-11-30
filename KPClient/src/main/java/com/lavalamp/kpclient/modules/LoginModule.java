@@ -1,7 +1,7 @@
 package com.lavalamp.kpclient.modules;
 
 import client.ServerClient;
-import com.lavalamp.kpclient.LoginController;
+import com.lavalamp.kpclient.contollers.LoginController;
 import com.lavalamp.kpclient.hashing.HashGenerator;
 import pojo.Content;
 import pojo.User;
@@ -14,13 +14,14 @@ import java.util.ArrayList;
 
 public class LoginModule {
     private final LoginController loginController;
-    private final ServerClient serverClient;
+    private ServerClient serverClient;
     public LoginModule(LoginController loginController){
         this.loginController = loginController;
         serverClient = ServerClient.ConnectToServer();
     }
 
     public LoginResponse LogIn(User user){
+        serverClient = ServerClient.ConnectToServer();
         user.setPassword(HashGenerator.GenerateHashedPassword(user.getPassword()));
         serverClient.SendRequest(new LoginRequest(user));
         return (LoginResponse) serverClient.GetResponse();
