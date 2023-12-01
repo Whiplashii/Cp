@@ -1,7 +1,6 @@
 package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
-import com.lavalamp.kpclient.modules.AddContentScreenModule;
 import com.lavalamp.kpclient.modules.ContentManagementModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

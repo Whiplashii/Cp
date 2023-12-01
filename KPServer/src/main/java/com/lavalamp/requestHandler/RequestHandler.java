@@ -128,4 +128,22 @@ public class RequestHandler {
         user1.setWallet(value);
         return new AddMoneyResponse(user1,"");
     }
+    public IResponse HandleRequest(AddNewContentRequest request){
+        if(!user.getUserRole().equals(UserRole.creator)){
+            return new AddnewContentResponse(false, "Вы не можете создавать контент");
+        }
+        if (!contentDAO.SetContent((Content) request.GetPOJO(),user)) {
+            return new AddnewContentResponse(false, "Возникла ошибка");
+        }
+        return new AddnewContentResponse(true,"");
+    }
+    public IResponse HandleRequest(UpdateContentRequest request){
+        if(!user.getUserRole().equals(UserRole.creator)) {
+            return new UpdateContentResponse(true, "Вы не можете изменять контент");
+        }
+        if(!contentDAO.UpdateContent((Content) request.GetPOJO())) {
+            return new AddnewContentResponse(false,"Возникла ошибка");
+        }
+        return new UpdateContentResponse(true,"");
+    }
 }

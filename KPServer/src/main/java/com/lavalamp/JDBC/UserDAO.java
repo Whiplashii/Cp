@@ -22,7 +22,7 @@ public class UserDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.insertUser.toString());
             preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4,user.getUserSalt());
             preparedStatement.setFloat(5,user.getWallet());

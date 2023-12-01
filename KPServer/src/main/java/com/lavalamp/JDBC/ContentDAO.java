@@ -1,14 +1,10 @@
 package com.lavalamp.JDBC;
 
-import enums.UserRole;
 import enums.sqlqueries.ContentQueries;
 import pojo.Content;
 import pojo.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ContentDAO {
@@ -42,26 +38,26 @@ public class ContentDAO {
         return content;
     }
 
-    public void SetContent(Content content, User user){
+    public boolean SetContent(Content content, User user){
         if(connection == null){
             connection = JDBCConnector.GetConnection();
         }
         try {
-            if(!user.getUserRole().equals(UserRole.creator)){
-                return;
-            }
+            Date date = new Date(System.currentTimeMillis());
             PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.insert.toString());
             preparedStatement.setString(1,content.getContentName());
             preparedStatement.setString(2,content.getContentDescription());
             preparedStatement.setFloat(3,content.getContentPrice());
             preparedStatement.setInt(4,content.getContentTypeID());
-            preparedStatement.setInt(5,content.getUserID());
+            preparedStatement.setInt(5,user.getId());
             preparedStatement.setInt(6,user.getUserCurrencyID());
-            preparedStatement.setDate(7,content.getDate());
+            preparedStatement.setDate(7, Date.valueOf(date.toLocalDate()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public void RemoveContent(Content content){
@@ -78,18 +74,22 @@ public class ContentDAO {
         }
     }
 
-    public void UpdateName(Content content){
+    public boolean UpdateContent(Content content){
         if(connection == null){
             connection = JDBCConnector.GetConnection();
         }
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.updateName.toString());
+            PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.updateContent.toString());
             preparedStatement.setString(1,content.getContentName());
-            preparedStatement.setInt(2,content.getContentID());
+            preparedStatement.setString(2,content.getContentDescription());
+            preparedStatement.setFloat(3,content.getContentPrice());
+            preparedStatement.setInt(4,content.getUserID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public void UpdateDescription(Content content){

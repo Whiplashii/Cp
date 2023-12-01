@@ -9,6 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pojo.Content;
 import pojo.User;
@@ -16,11 +19,20 @@ import pojo.User;
 import java.io.IOException;
 
 public class AddContentScreenController {
+
+    @FXML
+    private TextField titleTextField;
+    @FXML
+    private TextArea descriptionTextArea;
+    @FXML
+    private MenuButton contentTypeMenuButton;
+    @FXML
+    private TextField priceTextField;
     @FXML
     private Button backButton;
     private AddContentScreenModule addContentScreenModule;
     private User user;
-    private Content content;
+    private Content content = null;
     public AddContentScreenController(){
         addContentScreenModule = new AddContentScreenModule();
     }
@@ -32,12 +44,47 @@ public class AddContentScreenController {
         }
     }
     public void SetColumns(){
+        titleTextField.setText(content.getContentName());
+        descriptionTextArea.setText(content.getContentDescription());
+        priceTextField.setText(String.valueOf(content.getContentPrice()));
+    }
+    public void GetColumns(){
+        content.setContentName(titleTextField.getText());
+        content.setContentDescription(descriptionTextArea.getText());
+        content.setContentTypeID(1);
+        content.setContentPrice(Float.parseFloat(priceTextField.getText()));
     }
 
     @FXML
-    private void BackButtonClick(ActionEvent event) {
+    private void OnBackButtonClick(ActionEvent event) {
         LoadContentManagementScene(event);
     }
+    @FXML
+    private void OnSubmitButtonCLick(ActionEvent event) {
+        boolean isNew = false;
+        if (content == null) {
+            isNew = true;
+            content = new Content();
+        }
+        GetColumns();
+        boolean isChanged;
+        String context;
+        if (isNew) {
+            var response = addContentScreenModule.AddNewContent(content);
+            isChanged = response.getAdded();
+            context = response.getContext();
+        } else {
+            var response = addContentScreenModule.AddContentChanges(content);
+            isChanged = response.getUpdated();
+            context = response.getContext();
+        }
+        if (!isChanged) {
+            System.out.println(context);
+            return;
+        }
+        LoadContentManagementScene(event);
+    }
+
     private void LoadContentManagementScene(ActionEvent event){
         try {
             FXMLLoader loader = new FXMLLoader(Client.class.getResource("content-management-view.fxml"));

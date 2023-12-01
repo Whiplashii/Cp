@@ -3,6 +3,7 @@ package com.lavalamp.serverlauncher;
 import com.lavalamp.requestHandler.RequestHandler;
 import request.*;
 import response.IResponse;
+import response.UpdateContentResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,7 +15,6 @@ public class Server implements Runnable {
     private ServerSocket serverSocket;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
-
     private RequestHandler requestHandler;
     private Socket socket;
     Server(ServerSocket serverSocket){
@@ -53,6 +53,7 @@ public class Server implements Runnable {
         objectOutputStream.writeObject(response);
     }
     private IResponse CreateResponse(IRequest request) {
+
         if (request.getClass() == LoginRequest.class) {
             return requestHandler.HandleRequest((LoginRequest) request);
         }
@@ -76,6 +77,12 @@ public class Server implements Runnable {
         }
         if(request.getClass() == AddMoneyRequest.class){
             return requestHandler.HandleRequest((AddMoneyRequest) request);
+        }
+        if(request.getClass() == AddNewContentRequest.class){
+            return requestHandler.HandleRequest((AddNewContentRequest) request);
+        }
+        if(request.getClass() == UpdateContentRequest.class){
+            return requestHandler.HandleRequest((UpdateContentRequest) request);
         }
         return null;
     }
