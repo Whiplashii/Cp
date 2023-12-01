@@ -49,9 +49,12 @@ public class MainMenuController {
         userNameLabel.setText(this.user.getUserName());
         userWalletLabel.setText(this.user.getWallet() + "$");
         this.contentList = contentList;
-        if (user.getUserRole() != UserRole.creator) {
-            addContentButton.setDisable(true);
+        if (user.getUserRole() == UserRole.creator) {
+            addContentButton.setDisable(false);
             becomeContentButton.setDisable(true);
+        }else {
+            addContentButton.setDisable(true);
+            becomeContentButton.setDisable(false);
         }
         SetContent();
     }
@@ -121,8 +124,8 @@ public class MainMenuController {
          return;
      }
      user = response.getUser();
-     addContentButton.setDisable(false);
-     becomeContentButton.setDisable(true);
+        addContentButton.setDisable(false);
+        becomeContentButton.setDisable(true);
     }
 
     @FXML

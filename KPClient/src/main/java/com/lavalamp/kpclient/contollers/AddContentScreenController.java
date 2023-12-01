@@ -74,6 +74,7 @@ public class AddContentScreenController {
             isChanged = response.getAdded();
             context = response.getContext();
         } else {
+            System.err.println("fuck");
             var response = addContentScreenModule.AddContentChanges(content);
             isChanged = response.getUpdated();
             context = response.getContext();

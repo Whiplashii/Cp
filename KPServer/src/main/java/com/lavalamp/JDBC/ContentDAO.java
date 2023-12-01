@@ -83,7 +83,7 @@ public class ContentDAO {
             preparedStatement.setString(1,content.getContentName());
             preparedStatement.setString(2,content.getContentDescription());
             preparedStatement.setFloat(3,content.getContentPrice());
-            preparedStatement.setInt(4,content.getUserID());
+            preparedStatement.setInt(4,content.getContentID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
