@@ -9,12 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
-
-    private User user;
     private Connection connection;
-
     public boolean InsertNewUser(User user) {
         if (connection == null) {
             connection = JDBCConnector.GetConnection();
@@ -86,13 +85,6 @@ public class UserDAO {
         }
         return currencyID;
     }
-    public void CloseConnection(){
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public boolean BecomeCreator(int userID){
         if(connection == null){
             connection = JDBCConnector.GetConnection();
@@ -108,7 +100,6 @@ public class UserDAO {
         }
         return true;
     }
-
     public boolean BuyContent(int userID, int contentID){
         if (connection == null){
             connection = JDBCConnector.GetConnection();
@@ -137,6 +128,49 @@ public class UserDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public ArrayList<User> GetUsers(int id){
+        if (connection == null) {
+            connection = JDBCConnector.GetConnection();
+        }
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UserQueries.getUsers.toString());
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                users.add(SetUserFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return users;
+    }
+
+    private User SetUserFromResultSet(ResultSet resultSet){
+        User user = new User();
+        try {
+            boolean isBanned = resultSet.getInt("isbanned") != 0;
+            user.setUserName(resultSet.getString("username"));
+            user.setPassword(null);
+            user.setUserSalt(null);
+            user.setId(resultSet.getInt("userid"));
+            user.setUserRole(UserRole.setInt(resultSet.getInt("userroleid")));
+            user.setWallet(resultSet.getFloat("wallet"));
+            user.setUserCurrencyID(resultSet.getInt("currensyid"));
+            user.setBanned(isBanned);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+    public void CloseConnection(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

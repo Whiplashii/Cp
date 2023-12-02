@@ -8,6 +8,8 @@ import pojo.User;
 import request.*;
 import response.*;
 
+import java.util.ArrayList;
+
 
 public class RequestHandler {
     private UserDAO userDAO;
@@ -88,7 +90,6 @@ public class RequestHandler {
         user.setUserRole(UserRole.creator);
         return new BecomeCreatorResponse(user,"");
     }
-
     public IResponse HandleRequest(BuyContentRequest request){
         if(userDAO == null){
             userDAO = new UserDAO();
@@ -145,5 +146,13 @@ public class RequestHandler {
             return new AddnewContentResponse(false,"Возникла ошибка");
         }
         return new UpdateContentResponse(true,"");
+    }
+    public IResponse HandleRequest(GetUsersRequest request){
+        ArrayList<User> users;
+        users = userDAO.GetUsers(user.getId());
+        if(users == null){
+            return new GetUsersResponse(null,"Возникла ошибка");
+        }
+        return new GetUsersResponse(users,"");
     }
 }

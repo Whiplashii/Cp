@@ -53,7 +53,7 @@
    <right>
       <ScrollPane prefHeight="346.0" prefWidth="328.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="objectsVBox" prefHeight="357.0" prefWidth="317.0" style="-fx-background-color: #1b2330;" />
+            <VBox fx:id="objectsVBox" prefHeight="345.0" prefWidth="312.0" style="-fx-background-color: #1b2330;" />
          </content>
       </ScrollPane>
    </right>

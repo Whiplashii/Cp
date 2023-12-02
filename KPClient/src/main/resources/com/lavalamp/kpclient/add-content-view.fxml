@@ -30,9 +30,9 @@
         <items>
           <Button mnemonicParsing="false" onAction="#OnBackButtonClick">
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
+                  <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/logout_icon.png" />
+                        <Image url="@icons/arrow-back-icon.png" />
                      </image></ImageView>
                </graphic>
             </Button>
