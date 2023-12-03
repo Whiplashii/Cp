@@ -10,6 +10,7 @@ public enum UserQueries {
     becomeCreator("UPDATE user SET userroleid = ? where userid = ?"),
     buyContent("INSERT INTO usercontent (`userid`, `usercontentid`) VALUES (?, ?)"),
     changeMoney("UPDATE user SET wallet = ? WHERE (`userid` = ?)"),
+    updatedUser("Update user set userroleid = ?, isbanned = ? where userid = ?"),
     getUsers("select * from user where userid != ?");
     private String query;
 

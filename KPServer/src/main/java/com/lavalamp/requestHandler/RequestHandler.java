@@ -32,7 +32,6 @@ public class RequestHandler {
         LoginResponse loginResponse = new LoginResponse(responseUser,context);
         return loginResponse;
     }
-
     public IResponse HandleRequest(RegistrationRequest request) {
         if (userDAO == null) {
             userDAO = new UserDAO();
@@ -48,7 +47,7 @@ public class RequestHandler {
         System.err.println("User logged out");
         return new LogoutResponse();
     }
-    public IResponse HandleRequest(GetContentRequest getContentRequest){
+    public IResponse HandleRequest(GetContentRequest request){
         if(contentDAO == null){
             contentDAO = new ContentDAO();
         }
@@ -60,6 +59,16 @@ public class RequestHandler {
         GetContentResponse getContentResponse = new GetContentResponse();
         getContentResponse.contentList = contentDAO.GetContent();
         return getContentResponse;
+    }
+    public IResponse HandleRequest(GetCreatorContentRequest request){
+        if(contentDAO == null){
+            contentDAO = new ContentDAO();
+        }
+        ArrayList<Content> contentList = contentDAO.GetCreatorContent(((User)request.GetPOJO()).getId());
+        if(contentList == null) {
+            return new GetCreatorContentResponse(null,"Возникла ошибка");
+        }
+        return new GetCreatorContentResponse(contentList,"");
     }
     public IResponse HandleRequest(GetLibraryRequest request){
         if(contentDAO == null){
@@ -147,6 +156,13 @@ public class RequestHandler {
         }
         return new UpdateContentResponse(true,"");
     }
+    public IResponse HandleRequest(UpdateUserRequest request){
+        if(userDAO.UpdateUser((User)request.GetPOJO())){
+            return new UpdateUserResponse(false,"Произошла ошибка");
+        }
+        return new UpdateUserResponse(true,"");
+    }
+
     public IResponse HandleRequest(GetUsersRequest request){
         ArrayList<User> users;
         users = userDAO.GetUsers(user.getId());
@@ -155,4 +171,5 @@ public class RequestHandler {
         }
         return new GetUsersResponse(users,"");
     }
+
 }

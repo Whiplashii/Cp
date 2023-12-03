@@ -31,7 +31,7 @@ public class ContentManagementController {
 
     public void Initialize(User user) {
         this.user = user;
-        contentList = contentManagementModule.GetCreatorsContent();
+        contentList = contentManagementModule.GetCreatorsContent(user);
         SetContent();
     }
 

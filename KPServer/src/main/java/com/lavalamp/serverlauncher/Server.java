@@ -66,6 +66,9 @@ public class Server implements Runnable {
         if(request.getClass() == GetContentRequest.class) {
             return requestHandler.HandleRequest((GetContentRequest) request);
         }
+        if(request.getClass() == GetCreatorContentRequest.class) {
+            return requestHandler.HandleRequest((GetCreatorContentRequest) request);
+        }
         if(request.getClass() == GetLibraryRequest.class) {
             return requestHandler.HandleRequest((GetLibraryRequest) request);
         }
@@ -86,6 +89,9 @@ public class Server implements Runnable {
         }
         if(request.getClass() == GetUsersRequest.class){
             return requestHandler.HandleRequest((GetUsersRequest) request);
+        }
+        if(request.getClass() == UpdateUserRequest.class){
+            return requestHandler.HandleRequest((UpdateUserRequest) request);
         }
         return null;
     }

@@ -26,6 +26,23 @@ public class ContentDAO {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<Content> GetCreatorContent(int id){
+        if(connection == null){
+            connection = JDBCConnector.GetConnection();
+        }
+        try {
+            ArrayList<Content> contentList = new ArrayList<>();
+            PreparedStatement preparedStatement = connection.prepareStatement(ContentQueries.getCreatorContent.toString());
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                contentList.add(GetContentFromResultSet(resultSet));
+            }
+            return contentList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private Content GetContentFromResultSet(ResultSet resultSet)throws SQLException{
         Content content = new Content();
         content.setContentID(resultSet.getInt("contentid"));

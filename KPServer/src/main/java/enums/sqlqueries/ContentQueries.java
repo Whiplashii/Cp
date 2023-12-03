@@ -7,6 +7,7 @@ public enum ContentQueries {
     updateDescription("update content set contentdescription = ? where contentid = ?"),
     updatePrice("update content set contentPrice = ? where contentid = ?"),
     getContent("select * from content"),
+    getCreatorContent("select * from content where userid = ?"),
     getUserLibrary("Select contentid,contentname,contentdescription,contentprice,contenttypeid,content.userid,dateadd,currensyid from usercontent "+
             "inner join kp.content on usercontentid = contentid "+
             "where kp.usercontent.userid = ?"),

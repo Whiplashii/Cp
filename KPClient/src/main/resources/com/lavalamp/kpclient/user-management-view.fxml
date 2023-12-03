@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.contollers.UserManagementController">
+   <children>
+      <ToolBar layoutX="200.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <Button mnemonicParsing="false" onAction="#BackButtonClick">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/arrow-back-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+        </items>
+      </ToolBar>
+      <ScrollPane layoutX="-1.0" layoutY="40.0" prefHeight="360.0" prefWidth="600.0">
+         <content>
+            <Pane prefHeight="489.0" prefWidth="584.0" style="-fx-background-color: #1b2330;">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="159.0" prefWidth="167.0" style="-fx-background-color: white; -fx-background-radius: 100;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="9.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/user-icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Label fx:id="userNameLabel" layoutX="207.0" layoutY="39.0" prefHeight="25.0" prefWidth="368.0" style="-fx-background-color: white;" text="Username">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="isBannedCheckBox" layoutX="206.0" layoutY="117.0" mnemonicParsing="false" onAction="#ChangeIsBanned" prefHeight="17.0" prefWidth="368.0" style="-fx-background-color: white;" text="Заблокирован" textAlignment="JUSTIFY">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <ScrollPane layoutX="16.0" layoutY="220.0" prefHeight="191.0" prefWidth="554.0">
+                     <content>
+                        <VBox fx:id="contentItemVBox" prefHeight="213.0" prefWidth="548.0" />
+                     </content>
+                  </ScrollPane>
+                  <Label layoutX="16.0" layoutY="188.0" prefHeight="17.0" prefWidth="554.0" style="-fx-background-color: white;" text="Произведенный контент:">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="submitButton" layoutX="258.0" layoutY="440.0" mnemonicParsing="false" onAction="#OnSubmitButtonClick" style="-fx-background-color: green; -fx-background-radius: 20;" text="Изменить">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <ChoiceBox fx:id="userRoleChoiceBox" layoutX="207.0" layoutY="81.0" prefHeight="25.0" prefWidth="368.0" />
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

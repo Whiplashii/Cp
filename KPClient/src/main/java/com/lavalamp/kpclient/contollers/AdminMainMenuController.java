@@ -31,7 +31,6 @@ public class AdminMainMenuController {
         this.user = user;
         contentList = module.GetContent(this.user);
         users = module.GetUsers();
-        users.forEach(System.out::println);
         SetUserItems();
     }
 
@@ -49,8 +48,17 @@ public class AdminMainMenuController {
 
     private void OnUserItemClick(ActionEvent event , int userID){
         System.err.println(userID);
+        LoadUserManagementView(event,GetUserFromList(userID));
     }
 
+    private User GetUserFromList(int id){
+        for(var user:users){
+            if(user.getId() == id){
+                return user;
+            }
+        }
+        return null;
+    }
     @FXML
     private void LogoutButtonClick(ActionEvent event) {
         module.LogOut();
@@ -66,6 +74,22 @@ public class AdminMainMenuController {
             stage.show();
         } catch (IOException ioException) {
             ioException.printStackTrace();
+        }
+    }
+    private void LoadUserManagementView(ActionEvent event,User redactedUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Client.class.getResource("user-management-view.fxml"));
+            Parent root = loader.load();
+
+            UserManagementController controller = loader.getController();
+            controller.Initialize(user,redactedUser);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
