@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
 import pojo.User;
@@ -20,6 +21,9 @@ public class AdminMainMenuController {
     private User user;
     private ArrayList<Content> contentList;
     private ArrayList<User> users;
+    private ArrayList<UserItem> userItems = new ArrayList<>();
+    @FXML
+    private VBox userListVBox;
     public AdminMainMenuController(){
         module = new AdminMainMenuModule();
     }
@@ -28,8 +32,25 @@ public class AdminMainMenuController {
         contentList = module.GetContent(this.user);
         users = module.GetUsers();
         users.forEach(System.out::println);
-
+        SetUserItems();
     }
+
+    private void SetUserItems(){
+        for(var user : users){
+            UserItem userItem = new UserItem();
+            userItem.setUserID(user.getId());
+            userItem.SetUserName(user.getUserName());
+            userItem.SetUserRole(user.getUserRole());
+            userItem.getClickableArea().setOnAction((event -> OnUserItemClick(event,userItem.getUserID())));
+            userItems.add(userItem);
+            userListVBox.getChildren().add(userItem);
+        }
+    }
+
+    private void OnUserItemClick(ActionEvent event , int userID){
+        System.err.println(userID);
+    }
+
     @FXML
     private void LogoutButtonClick(ActionEvent event) {
         module.LogOut();
