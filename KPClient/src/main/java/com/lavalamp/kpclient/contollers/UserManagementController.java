@@ -65,6 +65,7 @@ public class UserManagementController {
             item.setItemID(content.getContentID());
             item.SetTitle(content.getContentName());
             item.SetPrice(content.getContentPrice() + "$");
+            item.setImage(content.getImageURL());
             itemList.add(item);
             contentItemVBox.getChildren().add(item);
         }

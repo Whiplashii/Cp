@@ -5,16 +5,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.contollers.UserLibraryController">
-   <right>
-      <ScrollPane prefHeight="400.0" prefWidth="287.0" BorderPane.alignment="CENTER">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="286.0">
-               <children>
-                  <VBox fx:id="itemsVBox" layoutX="1.0" prefHeight="344.0" prefWidth="274.0" />
-               </children></AnchorPane>
-        </content>
-      </ScrollPane>
-   </right>
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -30,4 +20,11 @@
         </items>
       </ToolBar>
    </top>
+   <right>
+      <ScrollPane prefHeight="356.0" prefWidth="327.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="itemsVBox" prefHeight="357.0" prefWidth="312.0" />
+         </content>
+      </ScrollPane>
+   </right>
 </BorderPane>

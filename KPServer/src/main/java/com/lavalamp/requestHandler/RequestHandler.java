@@ -152,7 +152,7 @@ public class RequestHandler {
             return new UpdateContentResponse(true, "Вы не можете изменять контент");
         }
         if(!contentDAO.UpdateContent((Content) request.GetPOJO())) {
-            return new AddnewContentResponse(false,"Возникла ошибка");
+            return new UpdateContentResponse(false,"Возникла ошибка");
         }
         return new UpdateContentResponse(true,"");
     }

@@ -37,6 +37,7 @@ public class UserLibraryController {
             item.setItemID(content.getContentID());
             item.SetTitle(content.getContentName());
             item.setPriceVisible(false);
+            item.setImage(content.getImageURL());
             items.add(item);
             itemsVBox.getChildren().add(item);
         }

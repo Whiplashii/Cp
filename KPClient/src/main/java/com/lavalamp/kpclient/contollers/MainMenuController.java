@@ -66,6 +66,7 @@ public class MainMenuController {
             item.SetTitle(content.getContentName());
             item.getClickableArea().setOnAction((event -> OnItemCLicked(event,item.getItemID())));
             item.SetPrice(content.getContentPrice() + "$");
+            item.setImage(content.getImageURL());
             items.add(item);
             objectsVBox.getChildren().add(item);
         }

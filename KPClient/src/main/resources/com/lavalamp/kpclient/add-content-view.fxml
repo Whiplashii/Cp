@@ -22,7 +22,9 @@
                   </MenuButton>
                   <TextField fx:id="priceTextField" layoutX="108.0" layoutY="269.0" prefHeight="25.0" prefWidth="378.0" />
                   <Label layoutX="103.0" layoutY="252.0" text="Цена:" />
-                  <Button layoutX="236.0" layoutY="323.0" mnemonicParsing="false" onAction="#OnSubmitButtonCLick" prefHeight="25.0" prefWidth="133.0" text="Подтвердить" />
+                  <Button layoutX="231.0" layoutY="353.0" mnemonicParsing="false" onAction="#OnSubmitButtonCLick" prefHeight="25.0" prefWidth="133.0" text="Подтвердить" />
+                  <TextField fx:id="imageURL" layoutX="107.0" layoutY="318.0" prefHeight="25.0" prefWidth="379.0" />
+                  <Label layoutX="105.0" layoutY="301.0" text="Ссылка на изображение:" />
                </children></AnchorPane>
         </content>
       </ScrollPane>

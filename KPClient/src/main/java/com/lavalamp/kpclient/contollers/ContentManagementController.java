@@ -42,6 +42,7 @@ public class ContentManagementController {
             item.SetTitle(content.getContentName());
             item.getClickableArea().setOnAction((event -> OnContentClick(event, item.getItemID())));
             item.SetPrice(content.getContentPrice() + "$");
+            item.setImage(content.getImageURL());
             items.add(item);
             itemsVBox.getChildren().add(item);
         }

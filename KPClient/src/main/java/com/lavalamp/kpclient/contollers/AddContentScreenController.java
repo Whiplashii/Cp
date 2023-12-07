@@ -30,6 +30,8 @@ public class AddContentScreenController {
     private TextField priceTextField;
     @FXML
     private Button backButton;
+    @FXML
+    private TextField imageURL;
     private AddContentScreenModule addContentScreenModule;
     private User user;
     private Content content = null;
@@ -53,6 +55,7 @@ public class AddContentScreenController {
         content.setContentDescription(descriptionTextArea.getText());
         content.setContentTypeID(1);
         content.setContentPrice(Float.parseFloat(priceTextField.getText()));
+        content.setImageURL(imageURL.getText());
     }
 
     @FXML

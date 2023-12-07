@@ -52,6 +52,7 @@ public class ContentDAO {
         content.setContentTypeID(resultSet.getInt("contenttypeid"));
         content.setDate(resultSet.getDate("dateadd"));
         content.setUserID(resultSet.getInt("userid"));
+        content.setImageURL(resultSet.getString("url"));
         return content;
     }
 
@@ -69,6 +70,7 @@ public class ContentDAO {
             preparedStatement.setInt(5,user.getId());
             preparedStatement.setInt(6,user.getUserCurrencyID());
             preparedStatement.setDate(7, Date.valueOf(date.toLocalDate()));
+            preparedStatement.setString(8,content.getImageURL());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +102,8 @@ public class ContentDAO {
             preparedStatement.setString(1,content.getContentName());
             preparedStatement.setString(2,content.getContentDescription());
             preparedStatement.setFloat(3,content.getContentPrice());
-            preparedStatement.setInt(4,content.getContentID());
+            preparedStatement.setString(4,content.getImageURL());
+            preparedStatement.setInt(5,content.getContentID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -11,8 +11,8 @@ public class Content implements Serializable {
     private int contentTypeID;
     private int userID;
     private Date date;
-
     private int currencyID;
+    private String imageURL;
 
     public Content() {
     }
@@ -79,5 +79,13 @@ public class Content implements Serializable {
 
     public void setCurrencyID(int currencyID) {
         this.currencyID = currencyID;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

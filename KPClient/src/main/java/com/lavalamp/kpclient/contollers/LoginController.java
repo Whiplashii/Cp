@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -30,12 +31,11 @@ public class LoginController {
 
     @FXML
     public void onLoginButtonClick(ActionEvent event) {
-        System.out.println(userName.getText());
-        System.out.println(passwordField.getText());
         User user = new User(userName.getText(), passwordField.getText());
         LoginResponse loginResponse = loginModule.LogIn(user);
         if (loginResponse.getUser() == null) {
             System.out.println(loginResponse.getContext());
+            ShowDialog(Alert.AlertType.ERROR,"Ошибка",null,loginResponse.getContext());
             return;
         }
         DecideMainMenuType(event, loginResponse.getUser());
@@ -59,6 +59,14 @@ public class LoginController {
             case user, creator -> LoadMainMenu(event, user);
             case admin -> LoadAdminMainMenu(event, user);
         }
+    }
+
+    private void ShowDialog(Alert.AlertType alertType,String dialogTitle,String dialogHeader,String dialogContent){
+        Alert alert = new Alert(alertType);
+        alert.setTitle(dialogTitle);
+        alert.setHeaderText(dialogHeader);
+        alert.setContentText(dialogContent);
+        alert.showAndWait();
     }
 
     private void LoadMainMenu(ActionEvent event, User user) {

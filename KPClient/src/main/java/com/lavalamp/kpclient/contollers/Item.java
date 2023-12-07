@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
@@ -61,5 +62,13 @@ public class Item extends Pane {
 
     public Button getClickableArea() {
         return clickableArea;
+    }
+
+    public void setImage(String url){
+        Thread thread = new Thread(()-> {
+            Image image = new Image(url);
+            itemImage.setImage(image);
+        });
+        thread.start();
     }
 }
