@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.DialogScreen;
 import com.lavalamp.kpclient.modules.UserManagementModule;
 import enums.UserRole;
 import javafx.collections.FXCollections;
@@ -11,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
@@ -80,10 +78,9 @@ public class UserManagementController {
     }
     @FXML
     private void OnSubmitButtonClick(ActionEvent event){
-        System.out.println(redactedUser.getBanned() + redactedUser.getUserRole().toString());
         var response = module.UpdateUser(redactedUser);
         if(response.isUpdated()){
-            System.out.println(response.getContext());
+            DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Error",null,response.getContext());
             return;
         }
         LoadAdminMainMenu(event,adminUser);

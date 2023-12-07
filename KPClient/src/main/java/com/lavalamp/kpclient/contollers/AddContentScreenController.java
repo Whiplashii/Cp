@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.DialogScreen;
 import com.lavalamp.kpclient.modules.AddContentScreenModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import pojo.Content;
 import pojo.User;
@@ -49,6 +47,7 @@ public class AddContentScreenController {
         titleTextField.setText(content.getContentName());
         descriptionTextArea.setText(content.getContentDescription());
         priceTextField.setText(String.valueOf(content.getContentPrice()));
+        imageURL.setText(content.getImageURL());
     }
     public void GetColumns(){
         content.setContentName(titleTextField.getText());
@@ -77,13 +76,12 @@ public class AddContentScreenController {
             isChanged = response.getAdded();
             context = response.getContext();
         } else {
-            System.err.println("fuck");
             var response = addContentScreenModule.AddContentChanges(content);
             isChanged = response.getUpdated();
             context = response.getContext();
         }
         if (!isChanged) {
-            System.out.println(context);
+            DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Error",null,context);
             return;
         }
         LoadContentManagementScene(event);

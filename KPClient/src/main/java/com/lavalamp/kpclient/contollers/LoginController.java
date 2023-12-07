@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.DialogScreen;
 import com.lavalamp.kpclient.modules.LoginModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import pojo.User;
 import response.LoginResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LoginController {
     private final LoginModule loginModule;
@@ -34,8 +36,7 @@ public class LoginController {
         User user = new User(userName.getText(), passwordField.getText());
         LoginResponse loginResponse = loginModule.LogIn(user);
         if (loginResponse.getUser() == null) {
-            System.out.println(loginResponse.getContext());
-            ShowDialog(Alert.AlertType.ERROR,"Ошибка",null,loginResponse.getContext());
+            DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Ошибка",null,loginResponse.getContext());
             return;
         }
         DecideMainMenuType(event, loginResponse.getUser());
@@ -44,7 +45,7 @@ public class LoginController {
     @FXML
     public void onRegistrationButtonClick(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Client.class.getResource("registration-view.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(Client.class.getResource("registration-view.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -59,14 +60,6 @@ public class LoginController {
             case user, creator -> LoadMainMenu(event, user);
             case admin -> LoadAdminMainMenu(event, user);
         }
-    }
-
-    private void ShowDialog(Alert.AlertType alertType,String dialogTitle,String dialogHeader,String dialogContent){
-        Alert alert = new Alert(alertType);
-        alert.setTitle(dialogTitle);
-        alert.setHeaderText(dialogHeader);
-        alert.setContentText(dialogContent);
-        alert.showAndWait();
     }
 
     private void LoadMainMenu(ActionEvent event, User user) {

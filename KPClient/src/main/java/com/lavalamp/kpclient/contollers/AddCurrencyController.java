@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.DialogScreen;
 import com.lavalamp.kpclient.contollers.MainMenuController;
 import com.lavalamp.kpclient.modules.AddCurrencyModule;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -51,7 +53,7 @@ public class AddCurrencyController {
         }
         AddMoneyResponse response = addCurrencyModule.AddMoney(value);
         if (response.getUser() == null) {
-            System.out.println(response.getContext());
+            DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Error",null,response.getContext());
             return;
         }
         user.setWallet(response.getUser().getWallet());

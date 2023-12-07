@@ -1,6 +1,7 @@
 package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
+import com.lavalamp.kpclient.DialogScreen;
 import com.lavalamp.kpclient.modules.MainMenuModule;
 import enums.UserRole;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -76,7 +78,7 @@ public class MainMenuController {
     private void OnItemCLicked(ActionEvent event,int itemID) {
         BuyContentResponse response =  mainMenuModule.BuyContent(GetContentById(itemID));
         if(response.getUser() == null){
-            System.out.println(response.getContext());
+            DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Error",null,response.getContext());
             return;
         }
         user.setWallet(response.getUser().getWallet());
@@ -111,7 +113,7 @@ public class MainMenuController {
     public void LibraryButtonClick(ActionEvent event){
         GetLibraryResponse response = mainMenuModule.GetLibrary();
         if(response.getContentList() == null){
-            System.out.println(response.getContext());
+            DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Error",null,response.getContext());
             return;
         }
         LoadLibraryScene(event,response.getContentList());
@@ -121,7 +123,7 @@ public class MainMenuController {
     public void BecomeCreatorButtonClick(ActionEvent event){
      var response= mainMenuModule.BecomeCreator();
      if(response.getUser() == null){
-         System.out.println(response.getContext());
+         DialogScreen.ShowDialog(Alert.AlertType.ERROR,"Error",null,response.getContext());
          return;
      }
      user = response.getUser();
