@@ -35,7 +35,7 @@
                   <Font size="14.0" />
                </font></Button>
             <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="0.0" />
-          <Button fx:id="logoutButton" alignment="TOP_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#LogoutButtonClick">
+          <Button fx:id="logoutButton" alignment="TOP_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#LogoutButtonClick" style="-fx-background-color: red;">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,23 +58,20 @@
       </ScrollPane>
    </right>
    <left>
-      <VBox prefHeight="346.0" prefWidth="271.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="346.0" prefWidth="271.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="35.0" prefWidth="222.0">
                <children>
-                  <TextField fx:id="searchField" onKeyTyped="#SearchFieldTyped" prefHeight="25.0" prefWidth="239.0" promptText="Поиск" />
-                  <Button mnemonicParsing="false" onMouseClicked="#SearchFieldTyped" prefHeight="25.0" prefWidth="20.0">
-                     <graphic>
-                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/searchIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <TextField fx:id="searchField" onKeyTyped="#SearchFieldTyped" prefHeight="25.0" prefWidth="265.0" promptText="Поиск">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
-            <Button fx:id="becomeContentButton" mnemonicParsing="false" onAction="#BecomeCreatorButtonClick" text="Стать создателем контента" />
+            <Button fx:id="becomeContentButton" mnemonicParsing="false" onAction="#BecomeCreatorButtonClick" text="Стать создателем контента">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
    </left>

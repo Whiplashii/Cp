@@ -18,7 +18,7 @@
                   </Label>
                </children>
             </VBox>
-          <Button mnemonicParsing="false" onAction="#LogoutButtonClick">
+          <Button mnemonicParsing="false" onAction="#LogoutButtonClick" style="-fx-background-color: red;">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,9 +38,9 @@
       </ScrollPane>
    </right>
    <left>
-      <Pane prefHeight="358.0" prefWidth="278.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="358.0" prefWidth="298.0" style="-fx-background-color: #1b2330;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" onKeyTyped="#SearchFieldTyped" prefHeight="25.0" prefWidth="257.0" promptText="Поиск" />
+            <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="257.0" promptText="Поиск" />
             <ChoiceBox fx:id="userRolesChoiceBox" layoutX="14.0" layoutY="63.0" prefHeight="25.0" prefWidth="257.0" />
          </children>
       </Pane>

@@ -7,15 +7,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lavalamp.kpclient.contollers.ContentManagementController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1b2330;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
                 <Button mnemonicParsing="false" onAction="#LogoutButtonClick">
                      <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" rotate="-180.0">
+                        <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/logout_icon.png" />
+                              <Image url="@icons/arrow-back-icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -31,7 +31,7 @@
          <right>
             <ScrollPane prefHeight="356.0" prefWidth="307.0" BorderPane.alignment="CENTER">
                <content>
-                  <VBox fx:id="itemsVBox" prefHeight="359.0" prefWidth="290.0" />
+                  <VBox fx:id="itemsVBox" prefHeight="359.0" prefWidth="290.0" style="-fx-background-color: #1b2330;" />
                </content>
             </ScrollPane>
          </right></BorderPane>

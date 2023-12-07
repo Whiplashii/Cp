@@ -42,9 +42,9 @@
                         <Font size="15.0" />
                      </font>
                   </CheckBox>
-                  <ScrollPane layoutX="16.0" layoutY="220.0" prefHeight="191.0" prefWidth="554.0">
+                  <ScrollPane layoutX="16.0" layoutY="220.0" prefHeight="191.0" prefWidth="554.0" style="-fx-background-color: #1b2330;">
                      <content>
-                        <VBox fx:id="contentItemVBox" prefHeight="213.0" prefWidth="548.0" />
+                        <VBox fx:id="contentItemVBox" alignment="TOP_CENTER" prefHeight="213.0" prefWidth="548.0" style="-fx-background-color: #1b2330;" />
                      </content>
                   </ScrollPane>
                   <Label layoutX="16.0" layoutY="188.0" prefHeight="17.0" prefWidth="554.0" style="-fx-background-color: white;" text="Произведенный контент:">
