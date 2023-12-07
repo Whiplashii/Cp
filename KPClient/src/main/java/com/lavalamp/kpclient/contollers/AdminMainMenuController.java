@@ -2,13 +2,18 @@ package com.lavalamp.kpclient.contollers;
 
 import com.lavalamp.kpclient.Client;
 import com.lavalamp.kpclient.modules.AdminMainMenuModule;
+import enums.UserRole;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
@@ -21,11 +26,18 @@ public class AdminMainMenuController {
 
     @FXML
     private Label userName;
+    @FXML
+    private ChoiceBox<String> userRolesChoiceBox;
+    @FXML
+    private TextField searchField;
     private AdminMainMenuModule module;
     private User user;
     private ArrayList<Content> contentList;
     private ArrayList<User> users;
     private ArrayList<UserItem> userItems = new ArrayList<>();
+
+    private ObservableList<String> roles = FXCollections.observableArrayList("Пользователь", "Администратор", "Создатель");
+
     @FXML
     private VBox userListVBox;
     public AdminMainMenuController(){
@@ -36,6 +48,8 @@ public class AdminMainMenuController {
         userName.setText( user.getUserName());
         contentList = module.GetContent(this.user);
         users = module.GetUsers();
+        userRolesChoiceBox.setItems(roles);
+        userRolesChoiceBox.setOnAction(this::ShowUsersSelectedUserRole);
         SetUserItems();
     }
 
@@ -51,8 +65,34 @@ public class AdminMainMenuController {
         }
     }
 
+    @FXML
+    public void SearchFieldTyped() {
+        userListVBox.getChildren().clear();
+        for (var item : userItems) {
+            if (item.GetUserName().contains(searchField.getText()))
+                userListVBox.getChildren().add(item);
+        }
+    }
     private void OnUserItemClick(ActionEvent event , int userID){
         LoadUserManagementView(event,GetUserFromList(userID));
+    }
+
+    private void ShowUsersSelectedUserRole(ActionEvent event){
+        userListVBox.getChildren().clear();
+        for (var item : userItems) {
+            if(GetUserRoleByID(item.getUserID()) == UserRole.setInt(roles.indexOf(this.userRolesChoiceBox.getValue()) + 1)){
+                userListVBox.getChildren().add(item);
+            }
+        }
+    }
+
+    private UserRole GetUserRoleByID(int id){
+        for(var user : users){
+            if(user.getId() == id){
+                return user.getUserRole();
+            }
+        }
+        return UserRole.user;
     }
 
     private User GetUserFromList(int id){

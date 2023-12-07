@@ -70,5 +70,6 @@ public class Item extends Pane {
             itemImage.setImage(image);
         });
         thread.start();
+
     }
 }

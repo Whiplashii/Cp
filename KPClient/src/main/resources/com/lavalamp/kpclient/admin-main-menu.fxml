@@ -37,4 +37,12 @@
          </content>
       </ScrollPane>
    </right>
+   <left>
+      <Pane prefHeight="358.0" prefWidth="278.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" onKeyTyped="#SearchFieldTyped" prefHeight="25.0" prefWidth="257.0" promptText="Поиск" />
+            <ChoiceBox fx:id="userRolesChoiceBox" layoutX="14.0" layoutY="63.0" prefHeight="25.0" prefWidth="257.0" />
+         </children>
+      </Pane>
+   </left>
 </BorderPane>

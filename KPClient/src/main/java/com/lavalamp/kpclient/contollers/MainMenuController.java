@@ -108,6 +108,7 @@ public class MainMenuController {
                 objectsVBox.getChildren().add(item);
         }
     }
+    
 
     @FXML
     public void LibraryButtonClick(ActionEvent event){
