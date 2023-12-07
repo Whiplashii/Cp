@@ -18,7 +18,8 @@ public class UserManagementModule {
     }
 
     public ArrayList<Content> GetContentByID(User user){
-        serverClient.SendRequest(new GetCreatorContentRequest(user));
+        user.getBanned();
+        serverClient.SendRequest(new GetCreatorContentRequest(user.getId()));
         return ((GetCreatorContentResponse)serverClient.GetResponse()).getContentList();
     }
     public UpdateUserResponse UpdateUser(User user){

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pojo.Content;
@@ -17,6 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AdminMainMenuController {
+
+    @FXML
+    private Label userName;
     private AdminMainMenuModule module;
     private User user;
     private ArrayList<Content> contentList;
@@ -29,6 +33,7 @@ public class AdminMainMenuController {
     }
     public void Initialize(User user){
         this.user = user;
+        userName.setText( user.getUserName());
         contentList = module.GetContent(this.user);
         users = module.GetUsers();
         SetUserItems();
@@ -47,7 +52,6 @@ public class AdminMainMenuController {
     }
 
     private void OnUserItemClick(ActionEvent event , int userID){
-        System.err.println(userID);
         LoadUserManagementView(event,GetUserFromList(userID));
     }
 

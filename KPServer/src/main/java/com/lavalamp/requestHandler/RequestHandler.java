@@ -64,7 +64,7 @@ public class RequestHandler {
         if(contentDAO == null){
             contentDAO = new ContentDAO();
         }
-        ArrayList<Content> contentList = contentDAO.GetCreatorContent(((User)request.GetPOJO()).getId());
+        ArrayList<Content> contentList = contentDAO.GetCreatorContent(((Integer)request.GetPOJO()));
         if(contentList == null) {
             return new GetCreatorContentResponse(null,"Возникла ошибка");
         }
@@ -157,7 +157,8 @@ public class RequestHandler {
         return new UpdateContentResponse(true,"");
     }
     public IResponse HandleRequest(UpdateUserRequest request){
-        if(userDAO.UpdateUser((User)request.GetPOJO())){
+        User user1 = (User)request.GetPOJO();
+        if(userDAO.UpdateUser(user1)){
             return new UpdateUserResponse(false,"Произошла ошибка");
         }
         return new UpdateUserResponse(true,"");

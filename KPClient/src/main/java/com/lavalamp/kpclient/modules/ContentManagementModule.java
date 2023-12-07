@@ -23,7 +23,7 @@ public class ContentManagementModule {
         return ((GetContentResponse) serverClient.GetResponse()).contentList;
     }
     public ArrayList<Content>GetCreatorsContent(User user){
-        serverClient.SendRequest(new GetCreatorContentRequest(user));
+        serverClient.SendRequest(new GetCreatorContentRequest(user.getId()));
         return ((GetCreatorContentResponse)serverClient.GetResponse()).getContentList();
     }
 }

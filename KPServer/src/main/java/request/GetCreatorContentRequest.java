@@ -5,14 +5,14 @@ import pojo.User;
 import java.io.Serializable;
 
 public class GetCreatorContentRequest implements IRequest {
-    private User user;
+    private Integer id;
 
-    public GetCreatorContentRequest(User user) {
-        this.user = user;
+    public GetCreatorContentRequest(Integer id) {
+        this.id = id;
     }
 
     @Override
     public Serializable GetPOJO() {
-        return user;
+        return id;
     }
 }
